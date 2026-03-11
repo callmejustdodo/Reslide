@@ -80,13 +80,13 @@ packages/core/src/context/SlideContext.tsx
 
 ### 1.4 Minimal Components
 
-- [ ] `Deck` — Root component. Renders `ThemeProvider` > `DeckProvider` > slides. Handles keyboard events (arrow keys, escape). Applies viewport scaling (`transform: scale`).
-- [ ] `SlideFrame` — Internal wrapper for each slide. Sets 1920×1080 container, applies background from `meta`.
-- [ ] `SlideLayout.Center` — Flex container, centered vertically and horizontally.
-- [ ] `SlideLayout.Default` — Top-left aligned with padding.
-- [ ] `Title` — Large heading text using theme fonts/colors.
-- [ ] `Body` — Body text.
-- [ ] `Notes` — Registers speaker notes in SlideContext (renders nothing visible).
+- [x] `Deck` — Root component. Renders `ThemeProvider` > `DeckProvider` > slides. Handles keyboard events (arrow keys, escape). Applies viewport scaling (`transform: scale`).
+- [x] `SlideFrame` — Internal wrapper for each slide. Sets 1920×1080 container, applies background from `meta`.
+- [x] `SlideLayout.Center` — Flex container, centered vertically and horizontally.
+- [x] `SlideLayout.Default` — Top-left aligned with padding.
+- [x] `Title` — Large heading text using theme fonts/colors.
+- [x] `Body` — Body text.
+- [x] `Notes` — Registers speaker notes in SlideContext (renders nothing visible).
 
 **Files created:**
 ```
