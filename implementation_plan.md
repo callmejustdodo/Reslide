@@ -125,10 +125,10 @@ packages/core/src/themes/createTheme.ts
 
 ### 1.7 Verification
 
-- [ ] Create `examples/basic/` with a 3-slide deck (hardcoded imports, no routing yet)
-- [ ] Run with Vite (`vite dev` directly), verify slides render and navigate
-- [ ] `pnpm build` succeeds across all packages
-- [ ] `pnpm typecheck` passes
+- [x] Create `examples/basic/` with a 3-slide deck (hardcoded imports, no routing yet)
+- [x] Run with Vite (`vite dev` directly), verify slides render and navigate
+- [x] `pnpm build` succeeds across all packages
+- [x] `pnpm typecheck` passes
 
 ---
 
