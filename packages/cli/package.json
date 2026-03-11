@@ -39,6 +39,10 @@
     "@vitejs/plugin-react": "^4.0.0",
     "vite": "^6.0.0"
   },
+  "optionalDependencies": {
+    "@reslide/export-pdf": "workspace:*",
+    "@reslide/export-pptx": "workspace:*"
+  },
   "devDependencies": {
     "@reslide/core": "workspace:*",
     "@types/node": "^22.0.0",

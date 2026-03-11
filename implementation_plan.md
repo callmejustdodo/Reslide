@@ -559,10 +559,10 @@ packages/skills/rules/07-advanced.md
 
 ### 8.5 Verification
 
-- [ ] All examples build and export successfully
-- [ ] `npx create-reslide` works from npm (after publish)
-- [ ] README is accurate and complete
-- [ ] CI passes on all packages
+- [x] All examples build and export successfully
+- [x] `npx create-reslide` works from npm (after publish)
+- [x] README is accurate and complete
+- [x] CI passes on all packages
 
 ---
 

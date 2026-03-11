@@ -10,5 +10,5 @@ export default defineConfig({
   dts: true,
   sourcemap: true,
   clean: true,
-  external: ['vite', '@vitejs/plugin-react', '@reslide/core'],
+  external: ['vite', '@vitejs/plugin-react', '@reslide/core', '@reslide/export-pdf', '@reslide/export-pptx'],
 });
