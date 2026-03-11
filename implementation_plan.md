@@ -203,17 +203,17 @@ packages/cli/src/commands/preview.ts
 
 ### 3.1 Remaining Components
 
-- [ ] `Subtitle` — Styled subtitle text
-- [ ] `Code` — Syntax highlighting with shiki
+- [x] `Subtitle` — Styled subtitle text
+- [x] `Code` — Syntax highlighting with shiki
   - Async shiki initialization (load highlighter once)
   - `language`, `highlightLines`, `showLineNumbers` props
   - Wrapped in shadcn `Card` for visual framing
-- [ ] `Image` — `<img>` with `fit`, `width`, `height` props
-- [ ] `List` — Ordered/unordered with Tailwind styling
-- [ ] `Columns` — CSS grid with `sizes` (column ratios) and `gap` props
-- [ ] `SlideLayout.TwoColumn` — Shorthand two-column layout
-- [ ] `SlideLayout.Section` — Large centered text for section dividers
-- [ ] `SlideLayout.Blank` — No padding or styling
+- [x] `Image` — `<img>` with `fit`, `width`, `height` props
+- [x] `List` — Ordered/unordered with Tailwind styling
+- [x] `Columns` — CSS grid with `sizes` (column ratios) and `gap` props
+- [x] `SlideLayout.TwoColumn` — Shorthand two-column layout
+- [x] `SlideLayout.Section` — Large centered text for section dividers
+- [x] `SlideLayout.Blank` — No padding or styling
 
 **Files created:**
 ```
@@ -226,14 +226,14 @@ packages/core/src/components/Columns.tsx
 
 ### 3.2 Fragment + Step System
 
-- [ ] `Fragment` component
+- [x] `Fragment` component
   - Calls `registerFragment()` on mount to get step order
   - Reads `currentStep` from `SlideContext`
   - Applies CSS class based on visibility (`visible = step >= order`)
   - Supports `animation` prop: `appear`, `fadeIn`, `flyIn`
-- [ ] `useStep()` hook — low-level hook for custom step animations
-- [ ] CSS transition classes for each animation type
-- [ ] Update `DeckProvider` navigation: right arrow advances step first, then slide
+- [x] `useStep()` hook — low-level hook for custom step animations
+- [x] CSS transition classes for each animation type
+- [x] Update `DeckProvider` navigation: right arrow advances step first, then slide
 
 **Files created:**
 ```
@@ -247,12 +247,12 @@ packages/core/src/styles/animations.css
 
 ### 3.3 Slide Transitions
 
-- [ ] `TransitionContainer` component
+- [x] `TransitionContainer` component
   - Renders current + previous slide during transition
   - Applies enter/exit CSS styles
   - Blocks navigation during transition
-- [ ] Built-in transitions: `fade`, `slideLeft`, `slideRight`, `zoom`, `none`
-- [ ] Per-slide transition override via `meta.transition`
+- [x] Built-in transitions: `fade`, `slideLeft`, `slideRight`, `zoom`, `none`
+- [x] Per-slide transition override via `meta.transition`
 
 **Files created:**
 ```
@@ -267,8 +267,8 @@ packages/core/src/transitions/index.ts
 
 ### 3.4 Additional Themes
 
-- [ ] `darkTheme` — Dark background, light text
-- [ ] `minimalTheme` — Muted colors, clean typography
+- [x] `darkTheme` — Dark background, light text
+- [x] `minimalTheme` — Muted colors, clean typography
 
 **Files created:**
 ```
