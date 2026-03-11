@@ -530,9 +530,9 @@ packages/skills/rules/07-advanced.md
 
 ### 8.1 Examples
 
-- [ ] `examples/basic/` — Minimal 5-slide deck using default theme
-- [ ] `examples/with-animations/` — Fragments, transitions, step-based reveals
-- [ ] `examples/conference-talk/` — Real-world talk with code blocks, images, two-column layouts
+- [x] `examples/basic/` — Minimal 5-slide deck using default theme
+- [x] `examples/with-animations/` — Fragments, transitions, step-based reveals
+- [x] `examples/conference-talk/` — Real-world talk with code blocks, images, two-column layouts
 
 ### 8.2 Polish
 
