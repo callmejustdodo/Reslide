@@ -342,7 +342,7 @@ packages/create-reslide/src/templates/    # Template files (embedded or file-bas
 
 ### 5.1 Export Bridge
 
-- [ ] Create `ExportBridge` component in core
+- [x] Create `ExportBridge` component in core
   - Exposes `window.__reslide` with navigation, metadata, notes
   - `goTo(slide, step)` returns Promise (settles after render)
   - Only injected when `mode === 'export'` (env variable or URL param)
@@ -354,9 +354,9 @@ packages/core/src/components/ExportBridge.tsx
 
 ### 5.2 Shared Export Utilities
 
-- [ ] Start Vite preview server programmatically
-- [ ] Launch Playwright browser
-- [ ] Iterate slides/steps helper
+- [x] Start Vite preview server programmatically
+- [x] Launch Playwright browser
+- [x] Iterate slides/steps helper
 
 **Files created:**
 ```
@@ -367,11 +367,11 @@ packages/cli/src/export/iterate.ts       # Slide/step iteration logic
 
 ### 5.3 PDF Export
 
-- [ ] Implement `exportPdf()` in `@reslide/export-pdf`
+- [x] Implement `exportPdf()` in `@reslide/export-pdf`
   - Screenshot each slide/step at 1920×1080
   - Assemble into PDF using `pdf-lib`
   - Options: format, landscape, includeSteps
-- [ ] Wire into CLI: `reslide export pdf [--output] [--include-steps] [--format]`
+- [x] Wire into CLI: `reslide export pdf [--output] [--include-steps] [--format]`
 
 **Files created:**
 ```
@@ -382,12 +382,12 @@ packages/export-pdf/src/options.ts
 
 ### 5.4 PPTX Export
 
-- [ ] Implement `exportPptx()` in `@reslide/export-pptx`
+- [x] Implement `exportPptx()` in `@reslide/export-pptx`
   - Screenshot each slide at 2x DPI
   - Create PPTX with `pptxgenjs`, embed screenshots as full-slide images
   - Extract and attach speaker notes
   - Options: layout, includeSteps, includeNotes
-- [ ] Wire into CLI: `reslide export pptx [--output] [--include-notes]`
+- [x] Wire into CLI: `reslide export pptx [--output] [--include-notes]`
 
 **Files created:**
 ```
@@ -398,10 +398,10 @@ packages/export-pptx/src/options.ts
 
 ### 5.5 CLI Export Command
 
-- [ ] `reslide export pdf` — runs build then PDF export
-- [ ] `reslide export pptx` — runs build then PPTX export
-- [ ] `reslide export all` — runs both sequentially
-- [ ] Progress indicators during export
+- [x] `reslide export pdf` — runs build then PDF export
+- [x] `reslide export pptx` — runs build then PPTX export
+- [x] `reslide export all` — runs both sequentially
+- [x] Progress indicators during export
 
 **Files created:**
 ```

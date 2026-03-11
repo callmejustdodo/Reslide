@@ -49,6 +49,33 @@ cli
     server.printUrls();
   });
 
+cli
+  .command('export pdf', 'Export to PDF')
+  .option('--output <path>', 'Output file path', { default: 'slides.pdf' })
+  .option('--include-steps', 'Include fragment steps as separate pages')
+  .action(async (options: { output: string; includeSteps?: boolean }) => {
+    const { exportPdf } = await import('./commands/export.js');
+    await exportPdf(options);
+  });
+
+cli
+  .command('export pptx', 'Export to PowerPoint')
+  .option('--output <path>', 'Output file path', { default: 'slides.pptx' })
+  .option('--include-notes', 'Include speaker notes', { default: true })
+  .option('--include-steps', 'Include fragment steps as separate slides')
+  .action(async (options: { output: string; includeNotes?: boolean; includeSteps?: boolean }) => {
+    const { exportPptx } = await import('./commands/export.js');
+    await exportPptx(options);
+  });
+
+cli
+  .command('export all', 'Export to all formats')
+  .option('--include-steps', 'Include fragment steps')
+  .action(async (options: { includeSteps?: boolean }) => {
+    const { exportAll } = await import('./commands/export.js');
+    await exportAll(options);
+  });
+
 cli.help();
 cli.version('0.0.1');
 

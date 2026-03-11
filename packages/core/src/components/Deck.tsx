@@ -5,6 +5,7 @@ import { DeckProvider, useDeckContext } from '../context/DeckContext.js';
 import { SlideProvider } from '../context/SlideContext.js';
 import { defaultTheme } from '../themes/defaultTheme.js';
 import { SlideFrame } from './SlideFrame.js';
+import { ExportBridge } from './ExportBridge.js';
 
 function DeckInner() {
   const {
@@ -154,6 +155,7 @@ export function Deck({ slides, config }: DeckProps) {
     <ThemeProvider theme={theme}>
       <DeckProvider slides={slides} config={config}>
         <DeckInner />
+        <ExportBridge />
       </DeckProvider>
     </ThemeProvider>
   );
