@@ -45,7 +45,7 @@ packages/skills/package.json
 
 ### 1.2 Core Types
 
-- [ ] Define all TypeScript interfaces in `packages/core/src/types/index.ts`
+- [x] Define all TypeScript interfaces in `packages/core/src/types/index.ts`
   - `ReslideConfig`, `ReslideTheme`, `SlideMeta`, `SlideEntry`
   - `TransitionConfig`, `TransitionDefinition`
   - `StepAnimation`, `FragmentProps`
