@@ -8,6 +8,9 @@ import { SlideFrame } from './SlideFrame.js';
 import { ExportBridge } from './ExportBridge.js';
 import { PresenterView } from '../presenter/PresenterView.js';
 import { useBroadcastSync } from '../hooks/useBroadcastSync.js';
+import { KeyboardHelp } from './KeyboardHelp.js';
+import { SlideOverview } from './SlideOverview.js';
+import { SlideErrorBoundary } from './SlideErrorBoundary.js';
 
 function DeckInner() {
   const {
@@ -113,6 +116,47 @@ function DeckInner() {
     window.location.hash = `#/${currentSlide + 1}`;
   }, [currentSlide]);
 
+  // Touch/swipe support
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
+
+  useEffect(() => {
+    function handleTouchStart(e: TouchEvent) {
+      const touch = e.touches[0];
+      if (touch) {
+        touchStartRef.current = { x: touch.clientX, y: touch.clientY };
+      }
+    }
+
+    function handleTouchEnd(e: TouchEvent) {
+      if (!touchStartRef.current) return;
+      const touch = e.changedTouches[0];
+      if (!touch) return;
+
+      const dx = touch.clientX - touchStartRef.current.x;
+      const dy = touch.clientY - touchStartRef.current.y;
+      const absDx = Math.abs(dx);
+      const absDy = Math.abs(dy);
+      const threshold = 50;
+
+      // Only handle horizontal swipes (ignore vertical scroll)
+      if (absDx > threshold && absDx > absDy) {
+        if (dx < 0) {
+          nextStep();
+        } else {
+          prevStep();
+        }
+      }
+      touchStartRef.current = null;
+    }
+
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd, { passive: true });
+    return () => {
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [nextStep, prevStep]);
+
   const currentEntry = slides[currentSlide];
   if (!currentEntry) return null;
 
@@ -152,7 +196,9 @@ function DeckInner() {
           onTotalStepsChange={handleTotalStepsChange}
         >
           <SlideFrame meta={currentEntry.meta} width={slideWidth} height={slideHeight}>
-            <SlideComponent />
+            <SlideErrorBoundary slideIndex={currentSlide}>
+              <SlideComponent />
+            </SlideErrorBoundary>
           </SlideFrame>
         </SlideProvider>
       </div>
@@ -171,6 +217,9 @@ function DeckInner() {
       >
         {currentSlide + 1} / {totalSlides}
       </div>
+
+      <KeyboardHelp />
+      <SlideOverview />
     </div>
   );
 }

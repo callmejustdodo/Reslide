@@ -536,12 +536,12 @@ packages/skills/rules/07-advanced.md
 
 ### 8.2 Polish
 
-- [ ] URL hash navigation (`#/3` for slide 3)
-- [ ] Touch/swipe support (mobile)
-- [ ] Responsive scaling verification across screen sizes
-- [ ] Keyboard shortcut help overlay (press `?`)
-- [ ] Slide overview mode (press `O` — grid of all slides)
-- [ ] Error boundaries per slide (one broken slide doesn't crash the deck)
+- [x] URL hash navigation (`#/3` for slide 3)
+- [x] Touch/swipe support (mobile)
+- [x] Responsive scaling verification across screen sizes
+- [x] Keyboard shortcut help overlay (press `?`)
+- [x] Slide overview mode (press `O` — grid of all slides)
+- [x] Error boundaries per slide (one broken slide doesn't crash the deck)
 
 ### 8.3 Documentation
 
