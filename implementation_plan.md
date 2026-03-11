@@ -475,14 +475,14 @@ packages/core/src/hooks/useBroadcastSync.ts
 
 ### 7.1 Write Skill Files
 
-- [ ] `SKILL.md` — Manifest with name, description, metadata, routing table
-- [ ] `rules/01-getting-started.md` — Project structure, file conventions, CLI commands
-- [ ] `rules/02-components.md` — Every component with full props table + TSX examples
-- [ ] `rules/03-layouts.md` — SlideLayout patterns, Columns, composition recipes
-- [ ] `rules/04-animations.md` — Fragment system, step ordering, transition config
-- [ ] `rules/05-theming.md` — Theme object, createTheme, CSS variables, shadcn sync
-- [ ] `rules/06-export.md` — Export commands, options, troubleshooting
-- [ ] `rules/07-advanced.md` — Custom hooks, custom components, presenter mode, export bridge
+- [x] `SKILL.md` — Manifest with name, description, metadata, routing table
+- [x] `rules/01-getting-started.md` — Project structure, file conventions, CLI commands
+- [x] `rules/02-components.md` — Every component with full props table + TSX examples
+- [x] `rules/03-layouts.md` — SlideLayout patterns, Columns, composition recipes
+- [x] `rules/04-animations.md` — Fragment system, step ordering, transition config
+- [x] `rules/05-theming.md` — Theme object, createTheme, CSS variables, shadcn sync
+- [x] `rules/06-export.md` — Export commands, options, troubleshooting
+- [x] `rules/07-advanced.md` — Custom hooks, custom components, presenter mode, export bridge
 
 Each rule file follows the format:
 ```markdown
@@ -510,8 +510,8 @@ packages/skills/rules/07-advanced.md
 
 ### 7.2 Wire into create-reslide
 
-- [ ] Update `create-reslide` to copy skills files when user opts in
-- [ ] Copy destination: `<project>/.claude/skills/reslide/`
+- [x] Update `create-reslide` to copy skills files when user opts in
+- [x] Copy destination: `<project>/.claude/skills/reslide/`
 
 ### 7.3 Verification
 
