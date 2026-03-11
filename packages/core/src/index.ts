@@ -30,3 +30,8 @@ export { SlideLayout } from './components/SlideLayout.js';
 export { Title } from './components/Title.js';
 export { Body } from './components/Body.js';
 export { Notes } from './components/Notes.js';
+
+// Hooks
+export { useDeck } from './hooks/useDeck.js';
+export { useSlide } from './hooks/useSlide.js';
+export { useTheme } from './hooks/useTheme.js';

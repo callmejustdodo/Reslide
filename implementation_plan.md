@@ -100,9 +100,9 @@ packages/core/src/components/Notes.tsx
 
 ### 1.5 Hooks
 
-- [ ] `useDeck()` — Returns `DeckContextValue`
-- [ ] `useSlide()` — Returns `SlideContextValue`
-- [ ] `useTheme()` — Returns `ReslideTheme`
+- [x] `useDeck()` — Returns `DeckContextValue`
+- [x] `useSlide()` — Returns `SlideContextValue`
+- [x] `useTheme()` — Returns `ReslideTheme`
 
 **Files created:**
 ```
