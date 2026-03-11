@@ -1,0 +1,17 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@3.0.0/schema.json",
+  "changelog": "@changesets/cli/changelog",
+  "commit": false,
+  "fixed": [],
+  "linked": [
+    ["@reslide/core", "@reslide/cli", "@reslide/export-pdf", "@reslide/export-pptx"]
+  ],
+  "access": "public",
+  "baseBranch": "main",
+  "updateInternalDependencies": "patch",
+  "ignore": [
+    "example-basic",
+    "example-with-animations",
+    "example-conference-talk"
+  ]
+}

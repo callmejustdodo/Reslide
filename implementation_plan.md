@@ -552,10 +552,10 @@ packages/skills/rules/07-advanced.md
 
 ### 8.4 Publish Setup
 
-- [ ] Configure `publishConfig` in each package.json
-- [ ] Set up changesets for versioning
-- [ ] GitHub Actions: CI (build + test + typecheck on PR)
-- [ ] GitHub Actions: Publish to npm on release tag
+- [x] Configure `publishConfig` in each package.json
+- [x] Set up changesets for versioning
+- [x] GitHub Actions: CI (build + test + typecheck on PR)
+- [x] GitHub Actions: Publish to npm on release tag
 
 ### 8.5 Verification
 
