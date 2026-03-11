@@ -545,10 +545,10 @@ packages/skills/rules/07-advanced.md
 
 ### 8.3 Documentation
 
-- [ ] Root `README.md` — Overview, quick start, feature list
-- [ ] `packages/core/README.md` — Component API reference
-- [ ] `packages/cli/README.md` — CLI commands reference
-- [ ] `packages/create-reslide/README.md` — Setup guide
+- [x] Root `README.md` — Overview, quick start, feature list
+- [x] `packages/core/README.md` — Component API reference
+- [x] `packages/cli/README.md` — CLI commands reference
+- [x] `packages/create-reslide/README.md` — Setup guide
 
 ### 8.4 Publish Setup
 
