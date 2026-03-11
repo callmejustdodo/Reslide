@@ -300,16 +300,15 @@ packages/core/src/themes/index.ts
 
 ### 4.1 Scaffolding CLI
 
-- [ ] Interactive prompts using `@clack/prompts`:
+- [x] Interactive prompts using `@clack/prompts`:
   1. Project name (default: directory argument)
   2. Theme: default / dark / minimal
   3. Install AI skills? (Y/n)
   4. Package manager: pnpm / npm / yarn / bun
-- [ ] Template file generation (from embedded templates):
+- [x] Template file generation (from embedded templates):
   - `package.json` with `@reslide/core`, `@reslide/cli` deps
   - `vite.config.ts` with react + reslide plugins
   - `reslide.config.ts` with chosen theme
-  - `tailwind.config.ts`
   - `tsconfig.json`
   - `index.html`
   - `src/main.tsx`
@@ -317,11 +316,8 @@ packages/core/src/themes/index.ts
   - `src/slides/02-content.tsx` (example with Fragment)
   - `src/slides/03-closing.tsx`
   - `src/lib/utils.ts` (cn utility)
-  - `src/components/ui/` (pre-installed shadcn components)
-  - `components.json` (shadcn config)
-- [ ] If skills selected: copy `@reslide/skills` files to `.claude/skills/reslide/`
-- [ ] Run `<pm> install` after scaffolding
-- [ ] Print success message with next steps
+- [x] If skills selected: copy `@reslide/skills` files to `.claude/skills/reslide/`
+- [x] Print success message with next steps
 
 **Files created:**
 ```

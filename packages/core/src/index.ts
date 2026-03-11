@@ -47,3 +47,6 @@ export { useStep } from './hooks/useStep.js';
 
 // Transitions
 export { getTransition } from './transitions/index.js';
+
+// Utils
+export { defineConfig } from './utils/defineConfig.js';
