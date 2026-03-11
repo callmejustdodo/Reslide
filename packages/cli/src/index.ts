@@ -1,2 +1,2 @@
-// @reslide/cli - CLI commands and Vite plugin
-export {};
+export { default as reslidePlugin } from './vite/plugin.js';
+export type { DiscoveredSlide } from './vite/discover.js';

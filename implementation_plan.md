@@ -138,15 +138,15 @@ packages/core/src/themes/createTheme.ts
 
 ### 2.1 Vite Plugin
 
-- [ ] Create `packages/cli/src/vite/plugin.ts`
+- [x] Create `packages/cli/src/vite/plugin.ts`
   - `resolveId()` — handle `virtual:reslide/slides` and `virtual:reslide/config`
   - `load()` — scan `src/slides/`, sort by filename prefix, generate import code
   - `handleHotUpdate()` — re-scan when files added/removed in `src/slides/`
-- [ ] Implement ordering algorithm:
+- [x] Implement ordering algorithm:
   - Extract numeric prefix (e.g., `01-intro` → order 1, name `intro`)
   - If `reslide.config.ts` has `slides[]`, use that order instead
   - Match config names to files (strip prefix for matching)
-- [ ] Create `virtual:reslide/config` module from `reslide.config.ts`
+- [x] Create `virtual:reslide/config` module from `reslide.config.ts`
 
 **Files created:**
 ```
@@ -158,7 +158,7 @@ packages/cli/src/utils/config.ts       # Config loader
 
 ### 2.2 TypeScript Support for Virtual Modules
 
-- [ ] Create `packages/cli/client.d.ts` with module declarations for `virtual:reslide/slides` and `virtual:reslide/config`
+- [x] Create `packages/cli/client.d.ts` with module declarations for `virtual:reslide/slides` and `virtual:reslide/config`
 
 **Files created:**
 ```
@@ -167,11 +167,11 @@ packages/cli/client.d.ts
 
 ### 2.3 CLI Commands
 
-- [ ] Implement CLI entry with `cac`
-- [ ] `reslide dev` — calls `createServer()` from Vite with reslide plugin
-- [ ] `reslide build` — calls `build()` from Vite
-- [ ] `reslide preview` — calls `preview()` from Vite
-- [ ] Add `bin` field to `@reslide/cli` package.json
+- [x] Implement CLI entry with `cac`
+- [x] `reslide dev` — calls `createServer()` from Vite with reslide plugin
+- [x] `reslide build` — calls `build()` from Vite
+- [x] `reslide preview` — calls `preview()` from Vite
+- [x] Add `bin` field to `@reslide/cli` package.json
 
 **Files created:**
 ```
@@ -183,17 +183,17 @@ packages/cli/src/commands/preview.ts
 
 ### 2.4 Update Deck to Use Virtual Modules
 
-- [ ] Update `main.tsx` template to import from `virtual:reslide/slides`
-- [ ] Update `Deck` component to accept `slides: SlideEntry[]` prop
-- [ ] Render slides dynamically from the array
+- [x] Update `main.tsx` template to import from `virtual:reslide/slides`
+- [x] Update `Deck` component to accept `slides: SlideEntry[]` prop
+- [x] Render slides dynamically from the array
 
 ### 2.5 Verification
 
-- [ ] Create a test project with 3 slide files in `src/slides/`
-- [ ] `reslide dev` starts and slides are discovered in correct order
-- [ ] Add a new slide file → HMR picks it up
-- [ ] Add `slides[]` to config → order changes
-- [ ] `reslide build` produces working static SPA
+- [x] Create a test project with 3 slide files in `src/slides/`
+- [x] `reslide dev` starts and slides are discovered in correct order
+- [x] Add a new slide file → HMR picks it up
+- [x] Add `slides[]` to config → order changes
+- [x] `reslide build` produces working static SPA
 
 ---
 
