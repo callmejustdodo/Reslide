@@ -60,14 +60,14 @@ packages/core/src/index.ts          # Public barrel export
 
 ### 1.3 Context System
 
-- [ ] Implement `ThemeContext` + `ThemeProvider`
+- [x] Implement `ThemeContext` + `ThemeProvider`
   - Accept `ReslideTheme`, inject CSS variables onto root element
   - Sync shadcn CSS variables (`--primary`, `--background`, etc.)
-- [ ] Implement `DeckContext` + `DeckProvider`
+- [x] Implement `DeckContext` + `DeckProvider`
   - Manage `currentSlide`, `currentStep` state
   - Provide navigation functions (`goToSlide`, `next`, `prev`, `nextStep`, `prevStep`)
   - Step/slide advancement logic: steps first, then slide
-- [ ] Implement `SlideContext` + `SlideProvider`
+- [x] Implement `SlideContext` + `SlideProvider`
   - Per-slide step registry via `registerFragment()`
   - Track `totalSteps` for the current slide
 
@@ -113,8 +113,8 @@ packages/core/src/hooks/useTheme.ts
 
 ### 1.6 Default Theme
 
-- [ ] Define `defaultTheme` with sensible colors, fonts, spacing
-- [ ] Implement `createTheme(overrides)` deep-merge utility
+- [x] Define `defaultTheme` with sensible colors, fonts, spacing
+- [x] Implement `createTheme(overrides)` deep-merge utility
 
 **Files created:**
 ```
