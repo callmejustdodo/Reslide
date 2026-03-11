@@ -48,5 +48,8 @@ export { useStep } from './hooks/useStep.js';
 // Transitions
 export { getTransition } from './transitions/index.js';
 
+// Presenter
+export { PresenterView } from './presenter/PresenterView.js';
+
 // Utils
 export { defineConfig } from './utils/defineConfig.js';

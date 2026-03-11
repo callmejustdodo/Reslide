@@ -6,6 +6,8 @@ import { SlideProvider } from '../context/SlideContext.js';
 import { defaultTheme } from '../themes/defaultTheme.js';
 import { SlideFrame } from './SlideFrame.js';
 import { ExportBridge } from './ExportBridge.js';
+import { PresenterView } from '../presenter/PresenterView.js';
+import { useBroadcastSync } from '../hooks/useBroadcastSync.js';
 
 function DeckInner() {
   const {
@@ -19,11 +21,27 @@ function DeckInner() {
     config,
   } = useDeckContext();
 
+  const isPresenter = typeof window !== 'undefined' &&
+    new URLSearchParams(window.location.search).has('presenter');
+
+  // Sync navigation between presenter and audience windows
+  useBroadcastSync({
+    source: isPresenter ? 'presenter' : 'audience',
+    currentSlide,
+    currentStep,
+    onNavigate: useCallback((slide: number) => goToSlide(slide), [goToSlide]),
+  });
+
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
 
   const slideWidth = config.slide?.width ?? 1920;
   const slideHeight = config.slide?.height ?? 1080;
+
+  // If presenter mode, render presenter view
+  if (isPresenter) {
+    return <PresenterView />;
+  }
 
   // Viewport scaling
   useEffect(() => {
@@ -61,6 +79,15 @@ function DeckInner() {
         case 'End':
           e.preventDefault();
           goToSlide(totalSlides - 1);
+          break;
+        case 'p':
+        case 'P':
+          e.preventDefault();
+          window.open(
+            `${window.location.origin}${window.location.pathname}?presenter=true${window.location.hash}`,
+            'reslide-presenter',
+            'width=1200,height=800',
+          );
           break;
       }
     }

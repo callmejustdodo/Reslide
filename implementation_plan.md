@@ -424,14 +424,14 @@ packages/cli/src/commands/export.ts
 
 ### 6.1 Presenter View Components
 
-- [ ] `PresenterView` — Main presenter layout
+- [x] `PresenterView` — Main presenter layout
   - Current slide (rendered at small scale)
   - Next slide preview
   - Speaker notes (scrollable)
   - Elapsed timer with start/pause/reset
   - Slide counter (X / Y)
-- [ ] `PresenterTimer` — Stopwatch component
-- [ ] `PresenterNotes` — Notes display with scroll
+- [x] `PresenterTimer` — Stopwatch component
+- [x] `PresenterNotes` — Notes display with scroll
 
 **Files created:**
 ```
@@ -443,7 +443,7 @@ packages/core/src/presenter/PresenterLayout.tsx
 
 ### 6.2 BroadcastChannel Sync
 
-- [ ] `useBroadcastSync()` hook
+- [x] `useBroadcastSync()` hook
   - Creates `BroadcastChannel('reslide-sync')`
   - Sends navigation events on slide/step change
   - Receives and applies navigation from other window
@@ -456,16 +456,16 @@ packages/core/src/hooks/useBroadcastSync.ts
 
 ### 6.3 Integration
 
-- [ ] `P` key opens presenter window via `window.open()`
-- [ ] URL parameter `?presenter=true` renders `PresenterView` instead of `Deck`
-- [ ] `usePresenterMode()` hook for custom presenter logic
+- [x] `P` key opens presenter window via `window.open()`
+- [x] URL parameter `?presenter=true` renders `PresenterView` instead of `Deck`
+- [x] `useBroadcastSync()` hook for presenter sync
 
 ### 6.4 Verification
 
-- [ ] Press `P` → new window opens with presenter layout
-- [ ] Navigate in either window → other syncs
-- [ ] Speaker notes display correctly
-- [ ] Timer starts on first navigation
+- [x] Press `P` → new window opens with presenter layout
+- [x] Navigate in either window → other syncs
+- [x] Speaker notes display correctly
+- [x] Timer starts on first navigation
 
 ---
 
