@@ -10,13 +10,13 @@
 
 ### 1.1 Monorepo Setup
 
-- [ ] Initialize pnpm workspace with `pnpm-workspace.yaml`
-- [ ] Create `turbo.json` with build/test/typecheck/lint pipelines
-- [ ] Create `tsconfig.base.json` with shared compiler options (strict, ESNext, React JSX)
-- [ ] Create package directories: `packages/core`, `packages/cli`, `packages/create-reslide`, `packages/export-pdf`, `packages/export-pptx`, `packages/skills`
-- [ ] Configure `tsup.config.ts` in each package (ESM + CJS dual output)
-- [ ] Configure `vitest.config.ts` in `packages/core`
-- [ ] Add root scripts: `dev`, `build`, `test`, `typecheck`
+- [x] Initialize pnpm workspace with `pnpm-workspace.yaml`
+- [x] Create `turbo.json` with build/test/typecheck/lint pipelines
+- [x] Create `tsconfig.base.json` with shared compiler options (strict, ESNext, React JSX)
+- [x] Create package directories: `packages/core`, `packages/cli`, `packages/create-reslide`, `packages/export-pdf`, `packages/export-pptx`, `packages/skills`
+- [x] Configure `tsup.config.ts` in each package (ESM + CJS dual output)
+- [x] Configure `vitest.config.ts` in `packages/core`
+- [x] Add root scripts: `dev`, `build`, `test`, `typecheck`
 
 **Files created:**
 ```

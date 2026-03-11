@@ -1,0 +1,7 @@
+{
+  "name": "@reslide/skills",
+  "version": "0.0.1",
+  "description": "AI skills for Reslide (agentskills.io)",
+  "files": ["SKILL.md", "rules"],
+  "scripts": {}
+}

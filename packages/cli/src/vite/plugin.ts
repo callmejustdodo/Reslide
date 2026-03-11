@@ -1,0 +1,2 @@
+// Reslide Vite plugin
+export {};

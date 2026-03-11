@@ -2,3 +2,5 @@ node_modules/
 dist/
 .omc/
 *.tsbuildinfo
+.turbo
+.DS_Store

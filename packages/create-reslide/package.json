@@ -1,0 +1,26 @@
+{
+  "name": "create-reslide",
+  "version": "0.0.1",
+  "description": "Create a new Reslide presentation project",
+  "type": "module",
+  "bin": {
+    "create-reslide": "./dist/index.js"
+  },
+  "files": ["dist", "templates"],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.8.0",
+    "fs-extra": "^11.2.0",
+    "picocolors": "^1.1.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.0",
+    "@types/node": "^22.0.0",
+    "tsup": "^8.3.0",
+    "typescript": "^5.7.0"
+  }
+}
