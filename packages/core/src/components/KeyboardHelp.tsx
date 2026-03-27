@@ -1,5 +1,18 @@
 import { useEffect, useState } from 'react';
-import { cn } from '@/utils/cn.js';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from '@/components/ui/dialog.js';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+} from '@/components/ui/table.js';
+import { Badge } from '@/components/ui/badge.js';
 
 const shortcuts = [
   { key: '→ / Space', action: 'Next step or slide' },
@@ -20,43 +33,33 @@ export function KeyboardHelp() {
         e.preventDefault();
         setVisible((v) => !v);
       }
-      if (e.key === 'Escape' && visible) {
-        setVisible(false);
-      }
     }
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [visible]);
-
-  if (!visible) return null;
+  }, []);
 
   return (
-    <div
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm"
-      onClick={() => setVisible(false)}
-    >
-      <div
-        className="bg-rs-surface text-rs-text rounded-xl p-8 min-w-80 shadow-lg border border-border"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <h2 className="m-0 mb-4 text-xl font-heading font-semibold">
-          Keyboard Shortcuts
-        </h2>
-        <table className="w-full border-collapse">
-          <tbody>
+    <Dialog open={visible} onOpenChange={setVisible}>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle className="font-heading">Keyboard Shortcuts</DialogTitle>
+          <DialogDescription>Navigate your presentation with these shortcuts</DialogDescription>
+        </DialogHeader>
+        <Table>
+          <TableBody>
             {shortcuts.map(({ key, action }) => (
-              <tr key={key}>
-                <td className="py-1.5 pr-4 font-bold whitespace-nowrap">
-                  <kbd className="bg-white/10 px-2 py-0.5 rounded text-sm">
+              <TableRow key={key}>
+                <TableCell className="font-bold whitespace-nowrap w-40">
+                  <Badge variant="secondary" className="font-mono text-xs">
                     {key}
-                  </kbd>
-                </td>
-                <td className="py-1.5 opacity-80">{action}</td>
-              </tr>
+                  </Badge>
+                </TableCell>
+                <TableCell className="text-muted-foreground">{action}</TableCell>
+              </TableRow>
             ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
+          </TableBody>
+        </Table>
+      </DialogContent>
+    </Dialog>
   );
 }

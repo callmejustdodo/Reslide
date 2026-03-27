@@ -1,7 +1,11 @@
 import {
   SlideLayout,
   Title,
-  Body,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
@@ -9,94 +13,196 @@ import {
   ChartLegendContent,
 } from '@reslide/core';
 import type { ChartConfig } from '@reslide/core';
-import { Bar, BarChart, CartesianGrid, XAxis, Line, LineChart, Pie, PieChart } from 'recharts';
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Line,
+  LineChart,
+  Pie,
+  PieChart,
+  Area,
+  AreaChart,
+} from 'recharts';
 
-const barData = [
-  { month: 'Jan', slides: 120, exports: 45 },
-  { month: 'Feb', slides: 210, exports: 89 },
-  { month: 'Mar', slides: 350, exports: 156 },
-  { month: 'Apr', slides: 480, exports: 230 },
-  { month: 'May', slides: 610, exports: 340 },
-  { month: 'Jun', slides: 790, exports: 470 },
+const revenueData = [
+  { month: 'Jan', revenue: 4200, users: 1800 },
+  { month: 'Feb', revenue: 5100, users: 2400 },
+  { month: 'Mar', revenue: 6800, users: 3200 },
+  { month: 'Apr', revenue: 7400, users: 4100 },
+  { month: 'May', revenue: 9200, users: 5300 },
+  { month: 'Jun', revenue: 11800, users: 6800 },
 ];
 
-const barConfig = {
-  slides: { label: 'Slides Created', color: 'hsl(var(--chart-1))' },
-  exports: { label: 'Exports', color: 'hsl(var(--chart-2))' },
+const revenueConfig = {
+  revenue: { label: 'Revenue', color: '#2563eb' },
+  users: { label: 'Users', color: '#7c3aed' },
 } satisfies ChartConfig;
 
-const lineData = [
-  { week: 'W1', users: 50 },
-  { week: 'W2', users: 120 },
-  { week: 'W3', users: 280 },
-  { week: 'W4', users: 410 },
-  { week: 'W5', users: 650 },
-  { week: 'W6', users: 890 },
+const growthData = [
+  { week: 'W1', value: 120 },
+  { week: 'W2', value: 280 },
+  { week: 'W3', value: 450 },
+  { week: 'W4', value: 620 },
+  { week: 'W5', value: 890 },
+  { week: 'W6', value: 1240 },
 ];
 
-const lineConfig = {
-  users: { label: 'Active Users', color: 'hsl(var(--chart-3))' },
+const growthConfig = {
+  value: { label: 'Growth', color: '#2563eb' },
 } satisfies ChartConfig;
 
-const pieData = [
-  { format: 'Web', count: 450, fill: 'hsl(var(--chart-1))' },
-  { format: 'PDF', count: 280, fill: 'hsl(var(--chart-2))' },
-  { format: 'PPTX', count: 160, fill: 'hsl(var(--chart-4))' },
+const shareData = [
+  { name: 'Web', value: 48, fill: '#2563eb' },
+  { name: 'PDF', value: 30, fill: '#7c3aed' },
+  { name: 'PPTX', value: 22, fill: '#64748b' },
 ];
 
-const pieConfig = {
-  count: { label: 'Exports' },
-  Web: { label: 'Web', color: 'hsl(var(--chart-1))' },
-  PDF: { label: 'PDF', color: 'hsl(var(--chart-2))' },
-  PPTX: { label: 'PPTX', color: 'hsl(var(--chart-4))' },
+const shareConfig = {
+  value: { label: 'Share' },
+  Web: { label: 'Web', color: '#2563eb' },
+  PDF: { label: 'PDF', color: '#7c3aed' },
+  PPTX: { label: 'PPTX', color: '#64748b' },
+} satisfies ChartConfig;
+
+const activityData = [
+  { day: 'Mon', created: 32, exported: 18 },
+  { day: 'Tue', created: 45, exported: 28 },
+  { day: 'Wed', created: 58, exported: 35 },
+  { day: 'Thu', created: 42, exported: 22 },
+  { day: 'Fri', created: 67, exported: 48 },
+];
+
+const activityConfig = {
+  created: { label: 'Created', color: '#2563eb' },
+  exported: { label: 'Exported', color: '#7c3aed' },
 } satisfies ChartConfig;
 
 export default function Charts() {
   return (
-    <SlideLayout.Default>
-      <Title>Charts & Data Visualization</Title>
-      <Body>Built-in Recharts integration with theme-aware styling</Body>
-      <div className="grid grid-cols-3 gap-6 mt-4">
-        <div className="flex flex-col items-center gap-2">
-          <p className="text-sm font-medium text-muted-foreground">Bar Chart</p>
-          <ChartContainer config={barConfig} className="h-[200px] w-full">
-            <BarChart data={barData}>
-              <CartesianGrid vertical={false} />
-              <XAxis dataKey="month" tickLine={false} axisLine={false} />
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <Bar dataKey="slides" fill="var(--color-slides)" radius={4} />
-              <Bar dataKey="exports" fill="var(--color-exports)" radius={4} />
-            </BarChart>
-          </ChartContainer>
+    <SlideLayout.Blank>
+      <div className="flex flex-col w-full h-full p-12 gap-5">
+        <div>
+          <Title>Charts & Data Visualization</Title>
+          <p className="text-xl text-muted-foreground -mt-2">
+            Built-in Recharts integration with theme-aware styling
+          </p>
         </div>
-        <div className="flex flex-col items-center gap-2">
-          <p className="text-sm font-medium text-muted-foreground">Line Chart</p>
-          <ChartContainer config={lineConfig} className="h-[200px] w-full">
-            <LineChart data={lineData}>
-              <CartesianGrid vertical={false} />
-              <XAxis dataKey="week" tickLine={false} axisLine={false} />
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <Line
-                type="monotone"
-                dataKey="users"
-                stroke="var(--color-users)"
-                strokeWidth={2}
-                dot={{ r: 4 }}
-              />
-            </LineChart>
-          </ChartContainer>
-        </div>
-        <div className="flex flex-col items-center gap-2">
-          <p className="text-sm font-medium text-muted-foreground">Pie Chart</p>
-          <ChartContainer config={pieConfig} className="h-[200px] w-full">
-            <PieChart>
-              <ChartTooltip content={<ChartTooltipContent hideLabel />} />
-              <Pie data={pieData} dataKey="count" nameKey="format" innerRadius={40} />
-              <ChartLegend content={<ChartLegendContent nameKey="format" />} />
-            </PieChart>
-          </ChartContainer>
+
+        <div className="grid grid-cols-2 gap-5 flex-1 min-h-0">
+          {/* Bar Chart */}
+          <Card className="flex flex-col">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-lg">Monthly Revenue</CardTitle>
+              <CardDescription>Revenue vs user growth over 6 months</CardDescription>
+            </CardHeader>
+            <CardContent className="flex-1 min-h-0 pb-4">
+              <ChartContainer config={revenueConfig} className="h-full w-full">
+                <BarChart data={revenueData} barGap={4}>
+                  <CartesianGrid vertical={false} strokeDasharray="3 3" />
+                  <XAxis dataKey="month" tickLine={false} axisLine={false} fontSize={12} />
+                  <YAxis tickLine={false} axisLine={false} fontSize={12} width={40} />
+                  <ChartTooltip content={<ChartTooltipContent />} />
+                  <ChartLegend content={<ChartLegendContent />} />
+                  <Bar dataKey="revenue" fill="var(--color-revenue)" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="users" fill="var(--color-users)" radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </ChartContainer>
+            </CardContent>
+          </Card>
+
+          {/* Area Chart */}
+          <Card className="flex flex-col">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-lg">User Growth</CardTitle>
+              <CardDescription>Weekly active users trending upward</CardDescription>
+            </CardHeader>
+            <CardContent className="flex-1 min-h-0 pb-4">
+              <ChartContainer config={growthConfig} className="h-full w-full">
+                <AreaChart data={growthData}>
+                  <defs>
+                    <linearGradient id="growthGradient" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#2563eb" stopOpacity={0.3} />
+                      <stop offset="100%" stopColor="#2563eb" stopOpacity={0.02} />
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid vertical={false} strokeDasharray="3 3" />
+                  <XAxis dataKey="week" tickLine={false} axisLine={false} fontSize={12} />
+                  <YAxis tickLine={false} axisLine={false} fontSize={12} width={40} />
+                  <ChartTooltip content={<ChartTooltipContent />} />
+                  <Area
+                    type="monotone"
+                    dataKey="value"
+                    stroke="var(--color-value)"
+                    strokeWidth={2.5}
+                    fill="url(#growthGradient)"
+                  />
+                </AreaChart>
+              </ChartContainer>
+            </CardContent>
+          </Card>
+
+          {/* Pie Chart */}
+          <Card className="flex flex-col">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-lg">Export Formats</CardTitle>
+              <CardDescription>Distribution by output type</CardDescription>
+            </CardHeader>
+            <CardContent className="flex-1 min-h-0 pb-4">
+              <ChartContainer config={shareConfig} className="h-full w-full">
+                <PieChart>
+                  <ChartTooltip content={<ChartTooltipContent hideLabel />} />
+                  <Pie
+                    data={shareData}
+                    dataKey="value"
+                    nameKey="name"
+                    innerRadius="45%"
+                    outerRadius="75%"
+                    strokeWidth={2}
+                    stroke="hsl(var(--background))"
+                  />
+                  <ChartLegend content={<ChartLegendContent nameKey="name" />} />
+                </PieChart>
+              </ChartContainer>
+            </CardContent>
+          </Card>
+
+          {/* Line Chart */}
+          <Card className="flex flex-col">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-lg">Weekly Activity</CardTitle>
+              <CardDescription>Slides created vs exported per day</CardDescription>
+            </CardHeader>
+            <CardContent className="flex-1 min-h-0 pb-4">
+              <ChartContainer config={activityConfig} className="h-full w-full">
+                <LineChart data={activityData}>
+                  <CartesianGrid vertical={false} strokeDasharray="3 3" />
+                  <XAxis dataKey="day" tickLine={false} axisLine={false} fontSize={12} />
+                  <YAxis tickLine={false} axisLine={false} fontSize={12} width={30} />
+                  <ChartTooltip content={<ChartTooltipContent />} />
+                  <ChartLegend content={<ChartLegendContent />} />
+                  <Line
+                    type="monotone"
+                    dataKey="created"
+                    stroke="var(--color-created)"
+                    strokeWidth={2.5}
+                    dot={{ r: 4, strokeWidth: 2 }}
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="exported"
+                    stroke="var(--color-exported)"
+                    strokeWidth={2.5}
+                    dot={{ r: 4, strokeWidth: 2 }}
+                  />
+                </LineChart>
+              </ChartContainer>
+            </CardContent>
+          </Card>
         </div>
       </div>
-    </SlideLayout.Default>
+    </SlideLayout.Blank>
   );
 }

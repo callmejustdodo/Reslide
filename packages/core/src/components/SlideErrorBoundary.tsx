@@ -1,5 +1,7 @@
 import { Component } from 'react';
 import type { ReactNode, ErrorInfo } from 'react';
+import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert.js';
+import { Badge } from '@/components/ui/badge.js';
 
 interface Props {
   slideIndex: number;
@@ -29,15 +31,17 @@ export class SlideErrorBoundary extends Component<Props, State> {
     if (this.state.hasError) {
       return (
         <div className="w-full h-full flex flex-col items-center justify-center bg-rs-background text-rs-text font-body p-8">
-          <div className="text-3xl mb-4 opacity-50">
+          <Badge variant="outline" className="mb-4 text-lg px-4 py-1">
             Slide {this.props.slideIndex + 1}
-          </div>
-          <div className="text-xl text-destructive mb-2">
-            Error rendering slide
-          </div>
-          <pre className="text-sm opacity-60 max-w-xl overflow-auto whitespace-pre-wrap">
-            {this.state.error?.message}
-          </pre>
+          </Badge>
+          <Alert variant="destructive" className="max-w-xl">
+            <AlertTitle>Error rendering slide</AlertTitle>
+            <AlertDescription>
+              <pre className="text-sm mt-2 whitespace-pre-wrap opacity-80">
+                {this.state.error?.message}
+              </pre>
+            </AlertDescription>
+          </Alert>
         </div>
       );
     }

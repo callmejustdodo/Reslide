@@ -11,6 +11,7 @@ import { useBroadcastSync } from '../hooks/useBroadcastSync.js';
 import { KeyboardHelp } from './KeyboardHelp.js';
 import { SlideOverview } from './SlideOverview.js';
 import { SlideErrorBoundary } from './SlideErrorBoundary.js';
+import { Badge } from '@/components/ui/badge.js';
 
 function DeckInner() {
   const {
@@ -195,9 +196,9 @@ function DeckInner() {
       </div>
 
       {/* Slide counter */}
-      <div className="fixed bottom-4 right-4 text-sm text-rs-text-secondary font-body opacity-60">
+      <Badge variant="secondary" className="fixed bottom-4 right-4 opacity-60 font-body">
         {currentSlide + 1} / {totalSlides}
-      </div>
+      </Badge>
 
       <KeyboardHelp />
       <SlideOverview />

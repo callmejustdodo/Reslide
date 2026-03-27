@@ -91,6 +91,18 @@ export {
 } from './components/ui/accordion.js';
 export { Alert, AlertTitle, AlertDescription } from './components/ui/alert.js';
 export { Avatar, AvatarImage, AvatarFallback } from './components/ui/avatar.js';
+export { ScrollArea, ScrollBar } from './components/ui/scroll-area.js';
+export {
+  Table,
+  TableHeader,
+  TableBody,
+  TableFooter,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableCaption,
+} from './components/ui/table.js';
+export { Progress } from './components/ui/progress.js';
 
 // Charts
 export {

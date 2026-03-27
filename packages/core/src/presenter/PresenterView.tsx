@@ -4,6 +4,24 @@ import { SlideProvider } from '../context/SlideContext.js';
 import { SlideFrame } from '../components/SlideFrame.js';
 import { useBroadcastSync } from '../hooks/useBroadcastSync.js';
 import { cn } from '@/utils/cn.js';
+import { Button } from '@/components/ui/button.js';
+import { Badge } from '@/components/ui/badge.js';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card.js';
+import { ScrollArea } from '@/components/ui/scroll-area.js';
+import { Separator } from '@/components/ui/separator.js';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from '@/components/ui/dialog.js';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+} from '@/components/ui/table.js';
 
 function ScaledSlide({
   slideWidth,
@@ -125,141 +143,158 @@ export function PresenterView() {
       }}
     >
       {/* Left sidebar: all slide thumbnails */}
-      <div className="row-span-full col-start-1 overflow-y-auto overflow-x-hidden border-r border-[#333] py-2">
-        {slides.map((entry, index) => {
-          const Comp = entry.component;
-          const isActive = index === currentSlide;
-          return (
-            <div
-              key={index}
-              ref={isActive ? activeThumbRef : undefined}
-              onClick={() => goToSlide(index)}
-              className={cn(
-                'flex items-start gap-1 px-2 py-1.5 cursor-pointer transition-colors duration-150 border-l-3',
-                isActive
-                  ? 'bg-indigo-500/15 border-l-indigo-500'
-                  : 'bg-transparent border-l-transparent hover:bg-white/5',
-              )}
-            >
+      <ScrollArea className="row-span-full col-start-1 border-r border-[#333]">
+        <div className="py-2">
+          {slides.map((entry, index) => {
+            const Comp = entry.component;
+            const isActive = index === currentSlide;
+            return (
               <div
+                key={index}
+                ref={isActive ? activeThumbRef : undefined}
+                onClick={() => goToSlide(index)}
                 className={cn(
-                  'text-[0.7rem] min-w-4 text-right pt-0.5',
-                  isActive ? 'text-indigo-500 font-bold' : 'text-[#666]',
+                  'flex items-start gap-1 px-2 py-1.5 cursor-pointer transition-colors duration-150 border-l-3',
+                  isActive
+                    ? 'bg-indigo-500/15 border-l-indigo-500'
+                    : 'bg-transparent border-l-transparent hover:bg-white/5',
                 )}
               >
-                {index + 1}
+                <Badge
+                  variant={isActive ? 'default' : 'outline'}
+                  className={cn(
+                    'text-[0.6rem] min-w-5 justify-center mt-0.5',
+                    !isActive && 'border-[#444] text-[#666]',
+                  )}
+                >
+                  {index + 1}
+                </Badge>
+                <div
+                  className={cn(
+                    'rounded-sm overflow-hidden shrink-0',
+                    isActive ? 'border-2 border-indigo-500' : 'border border-[#444]',
+                  )}
+                >
+                  <ScaledSlide slideWidth={slideWidth} slideHeight={slideHeight} scale={thumbScale}>
+                    <SlideProvider
+                      index={index}
+                      step={index === currentSlide ? currentStep : 0}
+                      meta={entry.meta}
+                      onTotalStepsChange={handleTotalSteps}
+                    >
+                      <SlideFrame meta={entry.meta} width={slideWidth} height={slideHeight}>
+                        <Comp />
+                      </SlideFrame>
+                    </SlideProvider>
+                  </ScaledSlide>
+                </div>
               </div>
-              <div
-                className={cn(
-                  'rounded-sm overflow-hidden shrink-0',
-                  isActive ? 'border-2 border-indigo-500' : 'border border-[#444]',
-                )}
-              >
-                <ScaledSlide slideWidth={slideWidth} slideHeight={slideHeight} scale={thumbScale}>
-                  <SlideProvider
-                    index={index}
-                    step={index === currentSlide ? currentStep : 0}
-                    meta={entry.meta}
-                    onTotalStepsChange={handleTotalSteps}
-                  >
-                    <SlideFrame meta={entry.meta} width={slideWidth} height={slideHeight}>
-                      <Comp />
-                    </SlideFrame>
-                  </SlideProvider>
-                </ScaledSlide>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      </ScrollArea>
 
       {/* Center: large current slide */}
       <div className="row-start-1 col-start-2 flex items-center justify-center p-6 overflow-hidden">
-        <div className="rounded-lg overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
-          <ScaledSlide slideWidth={slideWidth} slideHeight={slideHeight} scale={mainScale}>
-            <SlideProvider
-              key={`main-${currentSlide}`}
-              index={currentSlide}
-              step={currentStep}
-              meta={currentEntry.meta}
-              onTotalStepsChange={handleTotalSteps}
-            >
-              <SlideFrame meta={currentEntry.meta} width={slideWidth} height={slideHeight}>
-                <CurrentComponent />
-              </SlideFrame>
-            </SlideProvider>
-          </ScaledSlide>
-        </div>
+        <Card className="overflow-hidden border-0 p-0 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+          <CardContent className="p-0">
+            <ScaledSlide slideWidth={slideWidth} slideHeight={slideHeight} scale={mainScale}>
+              <SlideProvider
+                key={`main-${currentSlide}`}
+                index={currentSlide}
+                step={currentStep}
+                meta={currentEntry.meta}
+                onTotalStepsChange={handleTotalSteps}
+              >
+                <SlideFrame meta={currentEntry.meta} width={slideWidth} height={slideHeight}>
+                  <CurrentComponent />
+                </SlideFrame>
+              </SlideProvider>
+            </ScaledSlide>
+          </CardContent>
+        </Card>
       </div>
 
       {/* Right sidebar: speaker notes */}
-      <div className="row-start-1 col-start-3 border-l border-[#333] p-6 overflow-y-auto">
-        <div className="text-lg leading-relaxed text-gray-300 whitespace-pre-wrap">
-          {currentEntry.meta.notes || (
-            <span className="text-[#555] italic">No notes for this slide</span>
-          )}
-        </div>
-      </div>
+      <Card className="row-start-1 col-start-3 rounded-none border-0 border-l border-[#333] bg-transparent">
+        <CardHeader className="pb-2">
+          <CardTitle className="text-sm text-gray-400 uppercase tracking-wider">
+            Speaker Notes
+          </CardTitle>
+        </CardHeader>
+        <Separator className="bg-[#333]" />
+        <CardContent className="pt-4">
+          <ScrollArea className="h-full">
+            <div className="text-lg leading-relaxed text-gray-300 whitespace-pre-wrap">
+              {currentEntry.meta.notes || (
+                <span className="text-[#555] italic">No notes for this slide</span>
+              )}
+            </div>
+          </ScrollArea>
+        </CardContent>
+      </Card>
 
       {/* Bottom bar: nav controls */}
       <div className="row-start-2 col-start-2 col-span-2 flex items-center justify-center gap-4 py-3 px-4 border-t border-[#333] relative">
-        <button
+        <Button
+          variant="outline"
+          size="icon"
           onClick={prevStep}
-          className="size-10 flex items-center justify-center bg-[#2a2a2a] text-[#ccc] border border-[#444] rounded-full cursor-pointer text-base hover:bg-[#333] transition-colors"
+          className="rounded-full bg-[#2a2a2a] border-[#444] text-[#ccc] hover:bg-[#333] hover:text-white"
         >
           {'<'}
-        </button>
-        <div className="text-base text-[#999] min-w-12 text-center">
+        </Button>
+        <Badge variant="secondary" className="text-base min-w-12 justify-center">
           {currentSlide + 1} / {totalSlides}
-        </div>
-        <button
+        </Badge>
+        <Button
+          variant="outline"
+          size="icon"
           onClick={nextStep}
-          className="size-10 flex items-center justify-center bg-[#2a2a2a] text-[#ccc] border border-[#444] rounded-full cursor-pointer text-base hover:bg-[#333] transition-colors"
+          className="rounded-full bg-[#2a2a2a] border-[#444] text-[#ccc] hover:bg-[#333] hover:text-white"
         >
           {'>'}
-        </button>
-        <button
+        </Button>
+        <Button
+          variant="ghost"
+          size="icon-sm"
           onClick={() => setShowHelp((v) => !v)}
-          className="absolute right-4 size-8 flex items-center justify-center bg-[#2a2a2a] text-[#888] border border-[#444] rounded-full cursor-pointer text-sm font-bold hover:bg-[#333] transition-colors"
+          className="absolute right-4 rounded-full text-[#888] hover:text-white hover:bg-[#333]"
         >
           ?
-        </button>
+        </Button>
       </div>
 
-      {/* Help panel */}
-      {showHelp && (
-        <div
-          className="fixed inset-0 bg-black/70 flex items-center justify-center z-[9999]"
-          onClick={() => setShowHelp(false)}
-        >
-          <div
-            className="bg-[#2a2a2a] border border-[#444] rounded-xl px-10 py-8 max-w-md w-[90%] text-gray-200 font-sans"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="text-xl font-bold mb-5">
-              Keyboard Shortcuts
-            </div>
-            {[
-              ['\u2192 / Space', 'Next step / slide'],
-              ['\u2190', 'Previous step / slide'],
-              ['Home', 'First slide'],
-              ['End', 'Last slide'],
-              ['?', 'Toggle this help'],
-              ['Esc', 'Close this help'],
-            ].map(([key, desc]) => (
-              <div
-                key={key}
-                className="flex justify-between items-center py-1.5 border-b border-[#333]"
-              >
-                <kbd className="bg-[#1a1a1a] border border-[#555] rounded px-2 py-0.5 text-xs font-mono text-gray-300">
-                  {key}
-                </kbd>
-                <span className="text-gray-400 text-sm">{desc}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+      {/* Help dialog */}
+      <Dialog open={showHelp} onOpenChange={setShowHelp}>
+        <DialogContent className="bg-[#2a2a2a] border-[#444] text-gray-200 sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Keyboard Shortcuts</DialogTitle>
+            <DialogDescription>Navigate the presenter view</DialogDescription>
+          </DialogHeader>
+          <Table>
+            <TableBody>
+              {[
+                ['\u2192 / Space', 'Next step / slide'],
+                ['\u2190', 'Previous step / slide'],
+                ['Home', 'First slide'],
+                ['End', 'Last slide'],
+                ['?', 'Toggle this help'],
+                ['Esc', 'Close this help'],
+              ].map(([key, desc]) => (
+                <TableRow key={key} className="border-[#333]">
+                  <TableCell className="w-32">
+                    <Badge variant="outline" className="font-mono text-xs border-[#555] text-gray-300">
+                      {key}
+                    </Badge>
+                  </TableCell>
+                  <TableCell className="text-gray-400">{desc}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
