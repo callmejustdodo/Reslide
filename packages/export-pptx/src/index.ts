@@ -15,7 +15,7 @@ export interface PptxExportOptions {
 }
 
 export async function exportPptx(options: PptxExportOptions): Promise<void> {
-  const { url, output, includeNotes = true, width = 1920, height = 1080 } = options;
+  const { url, output, includeNotes = true, includeSteps = false, width = 1920, height = 1080 } = options;
 
   const { chromium } = await import('playwright');
 
@@ -24,9 +24,10 @@ export async function exportPptx(options: PptxExportOptions): Promise<void> {
   await page.setViewportSize({ width, height });
 
   await page.goto(`${url}?export=true`);
-  await page.waitForFunction(() => window.__reslide?.isReady() === true, null, { timeout: 10000 });
+  await page.waitForFunction(() => window.__reslide?.isReady() === true, null, { timeout: 30000 });
 
   const totalSlides = await page.evaluate(() => window.__reslide!.totalSlides);
+  const stepsPerSlide = await page.evaluate(() => window.__reslide!.stepsPerSlide);
 
   const pptx = new PptxGenJS();
   // 16:9 in inches: 13.33 x 7.5
@@ -34,24 +35,32 @@ export async function exportPptx(options: PptxExportOptions): Promise<void> {
   pptx.layout = 'RESLIDE';
 
   for (let s = 0; s < totalSlides; s++) {
-    await page.evaluate((slide) => window.__reslide!.goTo(slide, 0), s);
-    await page.waitForTimeout(150);
+    const maxStep = includeSteps ? (stepsPerSlide[s] ?? 0) : 0;
 
-    const screenshot = await page.screenshot({ type: 'png' });
-    const base64 = screenshot.toString('base64');
+    for (let step = 0; step <= maxStep; step++) {
+      await page.evaluate(
+        ({ slide, step }) => window.__reslide!.goTo(slide, step),
+        { slide: s, step },
+      );
+      await page.waitForTimeout(200);
 
-    const slide = pptx.addSlide();
-    slide.addImage({
-      data: `image/png;base64,${base64}`,
-      x: 0,
-      y: 0,
-      w: '100%',
-      h: '100%',
-    });
+      const screenshot = await page.screenshot({ type: 'png' });
+      const base64 = screenshot.toString('base64');
 
-    if (includeNotes) {
-      const notes = await page.evaluate((idx) => window.__reslide!.getNotes(idx), s);
-      if (notes) slide.addNotes(notes);
+      const pptxSlide = pptx.addSlide();
+      pptxSlide.addImage({
+        data: `image/png;base64,${base64}`,
+        x: 0,
+        y: 0,
+        w: '100%',
+        h: '100%',
+      });
+
+      // Only add notes on the first step (or the only step) of each slide
+      if (includeNotes && step === 0) {
+        const notes = await page.evaluate((idx) => window.__reslide!.getNotes(idx), s);
+        if (notes) pptxSlide.addNotes(notes);
+      }
     }
   }
 

@@ -24,20 +24,28 @@ export async function exportPdf(options: PdfExportOptions): Promise<void> {
 
   // Navigate with export mode
   await page.goto(`${url}?export=true`);
-  await page.waitForFunction(() => window.__reslide?.isReady() === true, null, { timeout: 10000 });
+  await page.waitForFunction(() => window.__reslide?.isReady() === true, null, { timeout: 30000 });
 
   const totalSlides = await page.evaluate(() => window.__reslide!.totalSlides);
+  const stepsPerSlide = await page.evaluate(() => window.__reslide!.stepsPerSlide);
 
   const pdfDoc = await PDFDocument.create();
 
   for (let s = 0; s < totalSlides; s++) {
-    await page.evaluate((slide) => window.__reslide!.goTo(slide, 0), s);
-    await page.waitForTimeout(150);
+    const maxStep = includeSteps ? (stepsPerSlide[s] ?? 0) : 0;
 
-    const screenshot = await page.screenshot({ type: 'png' });
-    const image = await pdfDoc.embedPng(screenshot);
-    const pdfPage = pdfDoc.addPage([width, height]);
-    pdfPage.drawImage(image, { x: 0, y: 0, width, height });
+    for (let step = 0; step <= maxStep; step++) {
+      await page.evaluate(
+        ({ slide, step }) => window.__reslide!.goTo(slide, step),
+        { slide: s, step },
+      );
+      await page.waitForTimeout(200);
+
+      const screenshot = await page.screenshot({ type: 'png' });
+      const image = await pdfDoc.embedPng(screenshot);
+      const pdfPage = pdfDoc.addPage([width, height]);
+      pdfPage.drawImage(image, { x: 0, y: 0, width, height });
+    }
   }
 
   const pdfBytes = await pdfDoc.save();

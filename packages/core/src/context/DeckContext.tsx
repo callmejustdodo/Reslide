@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import type { DeckContextValue, ReslideConfig, SlideEntry } from '../types/index.js';
 
 const defaultConfig: ReslideConfig = {
@@ -96,6 +96,19 @@ export function DeckProvider({ slides, config: userConfig, children }: DeckProvi
       return 0;
     });
   }, []);
+
+  // Listen for export bridge step navigation events
+  useEffect(() => {
+    function handleExportGoTo(e: Event) {
+      const { slide, step } = (e as CustomEvent<{ slide: number; step: number }>).detail;
+      if (slide >= 0 && slide < slides.length) {
+        setCurrentSlide(slide);
+        setCurrentStep(step);
+      }
+    }
+    window.addEventListener('reslide:export-goto', handleExportGoTo);
+    return () => window.removeEventListener('reslide:export-goto', handleExportGoTo);
+  }, [slides.length]);
 
   const value: DeckContextValue = {
     currentSlide,

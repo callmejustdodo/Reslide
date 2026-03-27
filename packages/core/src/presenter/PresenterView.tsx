@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDeckContext } from '../context/DeckContext.js';
 import { SlideProvider } from '../context/SlideContext.js';
 import { SlideFrame } from '../components/SlideFrame.js';
@@ -84,11 +84,21 @@ export function PresenterView() {
           e.preventDefault();
           goToSlide(totalSlides - 1);
           break;
+        case '?':
+          e.preventDefault();
+          setShowHelp((v) => !v);
+          break;
+        case 'Escape':
+          e.preventDefault();
+          setShowHelp(false);
+          break;
       }
     }
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [nextStep, prevStep, goToSlide, totalSlides]);
+
+  const [showHelp, setShowHelp] = useState(false);
 
   // Auto-scroll the active thumbnail into view
   const activeThumbRef = useRef<HTMLDivElement>(null);
@@ -311,7 +321,96 @@ export function PresenterView() {
         >
           {'>'}
         </button>
+        <button
+          onClick={() => setShowHelp((v) => !v)}
+          style={{
+            position: 'absolute',
+            right: '1rem',
+            width: '2rem',
+            height: '2rem',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: '#2a2a2a',
+            color: '#888',
+            border: '1px solid #444',
+            borderRadius: '50%',
+            cursor: 'pointer',
+            fontSize: '0.875rem',
+            fontWeight: 'bold',
+          }}
+        >
+          ?
+        </button>
       </div>
+
+      {/* Help panel */}
+      {showHelp && (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 9999,
+          }}
+          onClick={() => setShowHelp(false)}
+        >
+          <div
+            style={{
+              backgroundColor: '#2a2a2a',
+              border: '1px solid #444',
+              borderRadius: '0.75rem',
+              padding: '2rem 2.5rem',
+              maxWidth: '420px',
+              width: '90%',
+              color: '#e5e7eb',
+              fontFamily: "'Inter', system-ui, sans-serif",
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '1.25rem' }}>
+              Keyboard Shortcuts
+            </div>
+            {[
+              ['\u2192 / Space', 'Next step / slide'],
+              ['\u2190', 'Previous step / slide'],
+              ['Home', 'First slide'],
+              ['End', 'Last slide'],
+              ['?', 'Toggle this help'],
+              ['Esc', 'Close this help'],
+            ].map(([key, desc]) => (
+              <div
+                key={key}
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  padding: '0.4rem 0',
+                  borderBottom: '1px solid #333',
+                }}
+              >
+                <kbd
+                  style={{
+                    backgroundColor: '#1a1a1a',
+                    border: '1px solid #555',
+                    borderRadius: '4px',
+                    padding: '0.15rem 0.5rem',
+                    fontSize: '0.8rem',
+                    fontFamily: 'monospace',
+                    color: '#d1d5db',
+                  }}
+                >
+                  {key}
+                </kbd>
+                <span style={{ color: '#9ca3af', fontSize: '0.9rem' }}>{desc}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
