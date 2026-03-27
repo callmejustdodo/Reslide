@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import { cn } from '@/utils/cn.js';
 
 interface CodeProps {
   children: string;
@@ -13,7 +14,7 @@ export function Code({
   language = 'typescript',
   highlightLines = [],
   showLineNumbers = false,
-  className = '',
+  className,
 }: CodeProps) {
   const [html, setHtml] = useState<string>('');
   const codeRef = useRef<HTMLDivElement>(null);
@@ -51,15 +52,10 @@ export function Code({
   return (
     <div
       ref={codeRef}
-      className={className}
-      style={{
-        borderRadius: '0.75rem',
-        overflow: 'hidden',
-        fontSize: '1.25rem',
-        fontFamily: 'var(--rs-font-code)',
-        lineHeight: 1.6,
-        textAlign: 'left',
-      }}
+      className={cn(
+        'rounded-xl overflow-hidden text-xl font-code leading-relaxed text-left',
+        className,
+      )}
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );

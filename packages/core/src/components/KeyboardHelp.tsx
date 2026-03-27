@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { cn } from '@/utils/cn.js';
 
 const shortcuts = [
   { key: '→ / Space', action: 'Next step or slide' },
@@ -31,47 +32,26 @@ export function KeyboardHelp() {
 
   return (
     <div
-      style={{
-        position: 'fixed',
-        inset: 0,
-        zIndex: 9999,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.7)',
-        backdropFilter: 'blur(4px)',
-      }}
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm"
       onClick={() => setVisible(false)}
     >
       <div
-        style={{
-          background: 'var(--rs-color-surface, #1e293b)',
-          color: 'var(--rs-color-text, #fff)',
-          borderRadius: '12px',
-          padding: '2rem',
-          minWidth: '320px',
-          fontFamily: 'var(--rs-font-body)',
-        }}
+        className="bg-rs-surface text-rs-text rounded-xl p-8 min-w-80 shadow-lg border border-border"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 style={{ margin: '0 0 1rem', fontSize: '1.25rem', fontFamily: 'var(--rs-font-heading)' }}>
+        <h2 className="m-0 mb-4 text-xl font-heading font-semibold">
           Keyboard Shortcuts
         </h2>
-        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+        <table className="w-full border-collapse">
           <tbody>
             {shortcuts.map(({ key, action }) => (
               <tr key={key}>
-                <td style={{ padding: '0.4rem 1rem 0.4rem 0', fontWeight: 'bold', whiteSpace: 'nowrap' }}>
-                  <kbd style={{
-                    background: 'rgba(255,255,255,0.1)',
-                    padding: '2px 8px',
-                    borderRadius: '4px',
-                    fontSize: '0.875rem',
-                  }}>
+                <td className="py-1.5 pr-4 font-bold whitespace-nowrap">
+                  <kbd className="bg-white/10 px-2 py-0.5 rounded text-sm">
                     {key}
                   </kbd>
                 </td>
-                <td style={{ padding: '0.4rem 0', opacity: 0.8 }}>{action}</td>
+                <td className="py-1.5 opacity-80">{action}</td>
               </tr>
             ))}
           </tbody>

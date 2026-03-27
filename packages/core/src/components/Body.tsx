@@ -1,21 +1,18 @@
 import type { ReactNode } from 'react';
+import { cn } from '@/utils/cn.js';
 
 interface BodyProps {
   children: ReactNode;
   className?: string;
 }
 
-export function Body({ children, className = '' }: BodyProps) {
+export function Body({ children, className }: BodyProps) {
   return (
     <p
-      className={className}
-      style={{
-        fontSize: '1.75rem',
-        fontFamily: 'var(--rs-font-body)',
-        color: 'var(--rs-color-text-secondary)',
-        lineHeight: 1.6,
-        margin: 0,
-      }}
+      className={cn(
+        'text-[1.75rem] font-body text-rs-text-secondary leading-relaxed m-0',
+        className,
+      )}
     >
       {children}
     </p>

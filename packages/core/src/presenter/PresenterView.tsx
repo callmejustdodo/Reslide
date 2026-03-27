@@ -3,6 +3,7 @@ import { useDeckContext } from '../context/DeckContext.js';
 import { SlideProvider } from '../context/SlideContext.js';
 import { SlideFrame } from '../components/SlideFrame.js';
 import { useBroadcastSync } from '../hooks/useBroadcastSync.js';
+import { cn } from '@/utils/cn.js';
 
 function ScaledSlide({
   slideWidth,
@@ -17,22 +18,19 @@ function ScaledSlide({
 }) {
   return (
     <div
+      className="overflow-hidden relative"
       style={{
         width: slideWidth * scale,
         height: slideHeight * scale,
-        overflow: 'hidden',
-        position: 'relative',
       }}
     >
       <div
+        className="absolute top-0 left-0"
         style={{
           width: slideWidth,
           height: slideHeight,
           transform: `scale(${scale})`,
           transformOrigin: 'top left',
-          position: 'absolute',
-          top: 0,
-          left: 0,
         }}
       >
         {children}
@@ -110,10 +108,8 @@ export function PresenterView() {
 
   const thumbScale = 0.1;
   const thumbW = slideWidth * thumbScale;
-  const sidebarWidth = thumbW + 48; // thumbnail + padding + number
+  const sidebarWidth = thumbW + 48;
 
-  // Main slide: fill center area. Calculate scale to fit.
-  // We'll use CSS to make it responsive, but estimate a good scale.
   const mainScale = 0.45;
 
   const currentEntry = slides[currentSlide];
@@ -122,30 +118,14 @@ export function PresenterView() {
 
   return (
     <div
+      className="w-screen h-screen bg-[#1a1a1a] text-gray-50 font-sans grid overflow-hidden box-border"
       style={{
-        width: '100vw',
-        height: '100vh',
-        backgroundColor: '#1a1a1a',
-        color: '#f8fafc',
-        fontFamily: "'Inter', system-ui, sans-serif",
-        display: 'grid',
         gridTemplateColumns: `${sidebarWidth}px 1fr 300px`,
         gridTemplateRows: '1fr auto',
-        overflow: 'hidden',
-        boxSizing: 'border-box',
       }}
     >
       {/* Left sidebar: all slide thumbnails */}
-      <div
-        style={{
-          gridRow: '1 / -1',
-          gridColumn: '1',
-          overflowY: 'auto',
-          overflowX: 'hidden',
-          borderRight: '1px solid #333',
-          padding: '0.5rem 0',
-        }}
-      >
+      <div className="row-span-full col-start-1 overflow-y-auto overflow-x-hidden border-r border-[#333] py-2">
         {slides.map((entry, index) => {
           const Comp = entry.component;
           const isActive = index === currentSlide;
@@ -154,36 +134,26 @@ export function PresenterView() {
               key={index}
               ref={isActive ? activeThumbRef : undefined}
               onClick={() => goToSlide(index)}
-              style={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: '0.25rem',
-                padding: '0.35rem 0.5rem',
-                cursor: 'pointer',
-                backgroundColor: isActive ? 'rgba(99, 102, 241, 0.15)' : 'transparent',
-                borderLeft: isActive ? '3px solid #6366f1' : '3px solid transparent',
-                transition: 'background-color 0.15s',
-              }}
+              className={cn(
+                'flex items-start gap-1 px-2 py-1.5 cursor-pointer transition-colors duration-150 border-l-3',
+                isActive
+                  ? 'bg-indigo-500/15 border-l-indigo-500'
+                  : 'bg-transparent border-l-transparent hover:bg-white/5',
+              )}
             >
               <div
-                style={{
-                  fontSize: '0.7rem',
-                  color: isActive ? '#6366f1' : '#666',
-                  minWidth: '1rem',
-                  textAlign: 'right',
-                  paddingTop: '0.1rem',
-                  fontWeight: isActive ? 'bold' : 'normal',
-                }}
+                className={cn(
+                  'text-[0.7rem] min-w-4 text-right pt-0.5',
+                  isActive ? 'text-indigo-500 font-bold' : 'text-[#666]',
+                )}
               >
                 {index + 1}
               </div>
               <div
-                style={{
-                  border: isActive ? '2px solid #6366f1' : '1px solid #444',
-                  borderRadius: '3px',
-                  overflow: 'hidden',
-                  flexShrink: 0,
-                }}
+                className={cn(
+                  'rounded-sm overflow-hidden shrink-0',
+                  isActive ? 'border-2 border-indigo-500' : 'border border-[#444]',
+                )}
               >
                 <ScaledSlide slideWidth={slideWidth} slideHeight={slideHeight} scale={thumbScale}>
                   <SlideProvider
@@ -204,24 +174,8 @@ export function PresenterView() {
       </div>
 
       {/* Center: large current slide */}
-      <div
-        style={{
-          gridRow: '1',
-          gridColumn: '2',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '1.5rem',
-          overflow: 'hidden',
-        }}
-      >
-        <div
-          style={{
-            borderRadius: '0.5rem',
-            overflow: 'hidden',
-            boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
-          }}
-        >
+      <div className="row-start-1 col-start-2 flex items-center justify-center p-6 overflow-hidden">
+        <div className="rounded-lg overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
           <ScaledSlide slideWidth={slideWidth} slideHeight={slideHeight} scale={mainScale}>
             <SlideProvider
               key={`main-${currentSlide}`}
@@ -239,106 +193,34 @@ export function PresenterView() {
       </div>
 
       {/* Right sidebar: speaker notes */}
-      <div
-        style={{
-          gridRow: '1',
-          gridColumn: '3',
-          borderLeft: '1px solid #333',
-          padding: '1.5rem 1rem',
-          overflowY: 'auto',
-        }}
-      >
-        <div
-          style={{
-            fontSize: '1.125rem',
-            lineHeight: 1.7,
-            color: '#d1d5db',
-            whiteSpace: 'pre-wrap',
-          }}
-        >
+      <div className="row-start-1 col-start-3 border-l border-[#333] p-6 overflow-y-auto">
+        <div className="text-lg leading-relaxed text-gray-300 whitespace-pre-wrap">
           {currentEntry.meta.notes || (
-            <span style={{ color: '#555', fontStyle: 'italic' }}>No notes for this slide</span>
+            <span className="text-[#555] italic">No notes for this slide</span>
           )}
         </div>
       </div>
 
       {/* Bottom bar: nav controls */}
-      <div
-        style={{
-          gridRow: '2',
-          gridColumn: '2 / 4',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '1rem',
-          padding: '0.75rem 1rem',
-          borderTop: '1px solid #333',
-        }}
-      >
+      <div className="row-start-2 col-start-2 col-span-2 flex items-center justify-center gap-4 py-3 px-4 border-t border-[#333] relative">
         <button
           onClick={prevStep}
-          style={{
-            width: '2.5rem',
-            height: '2.5rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: '#2a2a2a',
-            color: '#ccc',
-            border: '1px solid #444',
-            borderRadius: '50%',
-            cursor: 'pointer',
-            fontSize: '1rem',
-          }}
+          className="size-10 flex items-center justify-center bg-[#2a2a2a] text-[#ccc] border border-[#444] rounded-full cursor-pointer text-base hover:bg-[#333] transition-colors"
         >
           {'<'}
         </button>
-        <div
-          style={{
-            fontSize: '1rem',
-            color: '#999',
-            minWidth: '3rem',
-            textAlign: 'center',
-          }}
-        >
+        <div className="text-base text-[#999] min-w-12 text-center">
           {currentSlide + 1} / {totalSlides}
         </div>
         <button
           onClick={nextStep}
-          style={{
-            width: '2.5rem',
-            height: '2.5rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: '#2a2a2a',
-            color: '#ccc',
-            border: '1px solid #444',
-            borderRadius: '50%',
-            cursor: 'pointer',
-            fontSize: '1rem',
-          }}
+          className="size-10 flex items-center justify-center bg-[#2a2a2a] text-[#ccc] border border-[#444] rounded-full cursor-pointer text-base hover:bg-[#333] transition-colors"
         >
           {'>'}
         </button>
         <button
           onClick={() => setShowHelp((v) => !v)}
-          style={{
-            position: 'absolute',
-            right: '1rem',
-            width: '2rem',
-            height: '2rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: '#2a2a2a',
-            color: '#888',
-            border: '1px solid #444',
-            borderRadius: '50%',
-            cursor: 'pointer',
-            fontSize: '0.875rem',
-            fontWeight: 'bold',
-          }}
+          className="absolute right-4 size-8 flex items-center justify-center bg-[#2a2a2a] text-[#888] border border-[#444] rounded-full cursor-pointer text-sm font-bold hover:bg-[#333] transition-colors"
         >
           ?
         </button>
@@ -347,31 +229,14 @@ export function PresenterView() {
       {/* Help panel */}
       {showHelp && (
         <div
-          style={{
-            position: 'fixed',
-            inset: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.7)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 9999,
-          }}
+          className="fixed inset-0 bg-black/70 flex items-center justify-center z-[9999]"
           onClick={() => setShowHelp(false)}
         >
           <div
-            style={{
-              backgroundColor: '#2a2a2a',
-              border: '1px solid #444',
-              borderRadius: '0.75rem',
-              padding: '2rem 2.5rem',
-              maxWidth: '420px',
-              width: '90%',
-              color: '#e5e7eb',
-              fontFamily: "'Inter', system-ui, sans-serif",
-            }}
+            className="bg-[#2a2a2a] border border-[#444] rounded-xl px-10 py-8 max-w-md w-[90%] text-gray-200 font-sans"
             onClick={(e) => e.stopPropagation()}
           >
-            <div style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '1.25rem' }}>
+            <div className="text-xl font-bold mb-5">
               Keyboard Shortcuts
             </div>
             {[
@@ -384,28 +249,12 @@ export function PresenterView() {
             ].map(([key, desc]) => (
               <div
                 key={key}
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  padding: '0.4rem 0',
-                  borderBottom: '1px solid #333',
-                }}
+                className="flex justify-between items-center py-1.5 border-b border-[#333]"
               >
-                <kbd
-                  style={{
-                    backgroundColor: '#1a1a1a',
-                    border: '1px solid #555',
-                    borderRadius: '4px',
-                    padding: '0.15rem 0.5rem',
-                    fontSize: '0.8rem',
-                    fontFamily: 'monospace',
-                    color: '#d1d5db',
-                  }}
-                >
+                <kbd className="bg-[#1a1a1a] border border-[#555] rounded px-2 py-0.5 text-xs font-mono text-gray-300">
                   {key}
                 </kbd>
-                <span style={{ color: '#9ca3af', fontSize: '0.9rem' }}>{desc}</span>
+                <span className="text-gray-400 text-sm">{desc}</span>
               </div>
             ))}
           </div>

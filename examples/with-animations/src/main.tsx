@@ -1,3 +1,4 @@
+import './styles.css';
 import { createRoot } from 'react-dom/client';
 import { Deck } from '@reslide/core';
 import { slides } from 'virtual:reslide/slides';

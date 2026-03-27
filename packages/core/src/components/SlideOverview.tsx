@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useDeckContext } from '../context/DeckContext.js';
 import { SlideProvider } from '../context/SlideContext.js';
 import { SlideFrame } from './SlideFrame.js';
+import { cn } from '@/utils/cn.js';
 
 export function SlideOverview() {
   const { slides, currentSlide, goToSlide, config } = useDeckContext();
@@ -37,23 +38,13 @@ export function SlideOverview() {
 
   return (
     <div
-      style={{
-        position: 'fixed',
-        inset: 0,
-        zIndex: 9998,
-        backgroundColor: 'rgba(0, 0, 0, 0.85)',
-        backdropFilter: 'blur(4px)',
-        overflow: 'auto',
-        padding: '2rem',
-      }}
+      className="fixed inset-0 z-[9998] bg-black/85 backdrop-blur-sm overflow-auto p-8"
       onClick={() => setVisible(false)}
     >
       <div
+        className="grid gap-4 justify-center"
         style={{
-          display: 'grid',
           gridTemplateColumns: `repeat(auto-fill, ${slideWidth * thumbScale + 16}px)`,
-          gap: '1rem',
-          justifyContent: 'center',
         }}
       >
         {slides.map((entry, index) => {
@@ -65,20 +56,18 @@ export function SlideOverview() {
                 e.stopPropagation();
                 handleSelect(index);
               }}
-              style={{
-                cursor: 'pointer',
-                borderRadius: '8px',
-                border: index === currentSlide ? '3px solid var(--rs-color-primary, #6366f1)' : '3px solid transparent',
-                overflow: 'hidden',
-                transition: 'border-color 0.2s',
-              }}
+              className={cn(
+                'cursor-pointer rounded-lg overflow-hidden border-3 transition-colors duration-200',
+                index === currentSlide
+                  ? 'border-rs-primary'
+                  : 'border-transparent hover:border-rs-primary/50',
+              )}
             >
               <div
+                className="overflow-hidden pointer-events-none"
                 style={{
                   width: slideWidth * thumbScale,
                   height: slideHeight * thumbScale,
-                  overflow: 'hidden',
-                  pointerEvents: 'none',
                 }}
               >
                 <div
@@ -96,15 +85,7 @@ export function SlideOverview() {
                   </SlideProvider>
                 </div>
               </div>
-              <div
-                style={{
-                  textAlign: 'center',
-                  padding: '0.25rem',
-                  fontSize: '0.75rem',
-                  color: 'var(--rs-color-text-secondary, #94a3b8)',
-                  fontFamily: 'var(--rs-font-body)',
-                }}
-              >
+              <div className="text-center p-1 text-xs text-rs-text-secondary font-body">
                 {index + 1}
               </div>
             </div>

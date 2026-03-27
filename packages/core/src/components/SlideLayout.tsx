@@ -1,44 +1,27 @@
 import type { ReactNode } from 'react';
+import { cn } from '@/utils/cn.js';
 
 interface LayoutProps {
   children: ReactNode;
   className?: string;
 }
 
-function Center({ children, className = '' }: LayoutProps) {
+function Center({ children, className }: LayoutProps) {
   return (
     <div
-      className={className}
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '100%',
-        height: '100%',
-        padding: '4rem',
-        gap: '1.5rem',
-        textAlign: 'center',
-      }}
+      className={cn(
+        'flex flex-col items-center justify-center w-full h-full p-16 gap-6 text-center',
+        className,
+      )}
     >
       {children}
     </div>
   );
 }
 
-function Default({ children, className = '' }: LayoutProps) {
+function Default({ children, className }: LayoutProps) {
   return (
-    <div
-      className={className}
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        width: '100%',
-        height: '100%',
-        padding: '4rem',
-        gap: '1.5rem',
-      }}
-    >
+    <div className={cn('flex flex-col w-full h-full p-16 gap-6', className)}>
       {children}
     </div>
   );
@@ -49,17 +32,13 @@ interface TwoColumnProps extends LayoutProps {
   gap?: string;
 }
 
-function TwoColumn({ children, className = '', sizes = [1, 1], gap = '2rem' }: TwoColumnProps) {
+function TwoColumn({ children, className, sizes = [1, 1], gap = '2rem' }: TwoColumnProps) {
   return (
     <div
-      className={className}
+      className={cn('grid w-full h-full p-16', className)}
       style={{
-        display: 'grid',
         gridTemplateColumns: `${sizes[0]}fr ${sizes[1]}fr`,
         gap,
-        width: '100%',
-        height: '100%',
-        padding: '4rem',
       }}
     >
       {children}
@@ -67,36 +46,22 @@ function TwoColumn({ children, className = '', sizes = [1, 1], gap = '2rem' }: T
   );
 }
 
-function Section({ children, className = '' }: LayoutProps) {
+function Section({ children, className }: LayoutProps) {
   return (
     <div
-      className={className}
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '100%',
-        height: '100%',
-        padding: '4rem',
-        textAlign: 'center',
-      }}
+      className={cn(
+        'flex flex-col items-center justify-center w-full h-full p-16 text-center',
+        className,
+      )}
     >
       {children}
     </div>
   );
 }
 
-function Blank({ children, className = '' }: LayoutProps) {
+function Blank({ children, className }: LayoutProps) {
   return (
-    <div
-      className={className}
-      style={{
-        width: '100%',
-        height: '100%',
-        position: 'relative',
-      }}
-    >
+    <div className={cn('w-full h-full relative', className)}>
       {children}
     </div>
   );

@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { cn } from '@/utils/cn.js';
 
 interface ListProps {
   items: ReactNode[];
@@ -6,24 +7,19 @@ interface ListProps {
   className?: string;
 }
 
-export function List({ items, ordered = false, className = '' }: ListProps) {
+export function List({ items, ordered = false, className }: ListProps) {
   const Tag = ordered ? 'ol' : 'ul';
 
   return (
     <Tag
-      className={className}
-      style={{
-        fontSize: '1.75rem',
-        fontFamily: 'var(--rs-font-body)',
-        color: 'var(--rs-color-text)',
-        lineHeight: 1.8,
-        paddingLeft: '2rem',
-        margin: 0,
-        listStyleType: ordered ? 'decimal' : 'disc',
-      }}
+      className={cn(
+        'text-[1.75rem] font-body text-rs-text leading-loose pl-8 m-0',
+        ordered ? 'list-decimal' : 'list-disc',
+        className,
+      )}
     >
       {items.map((item, i) => (
-        <li key={i} style={{ marginBottom: '0.5rem' }}>
+        <li key={i} className="mb-2">
           {item}
         </li>
       ))}

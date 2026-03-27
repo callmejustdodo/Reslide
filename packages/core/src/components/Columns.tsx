@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { cn } from '@/utils/cn.js';
 
 interface ColumnsProps {
   children: ReactNode;
@@ -11,17 +12,14 @@ export function Columns({
   children,
   sizes = [1, 1],
   gap = '2rem',
-  className = '',
+  className,
 }: ColumnsProps) {
   return (
     <div
-      className={className}
+      className={cn('grid w-full h-full', className)}
       style={{
-        display: 'grid',
         gridTemplateColumns: sizes.map((s) => `${s}fr`).join(' '),
         gap,
-        width: '100%',
-        height: '100%',
       }}
     >
       {children}

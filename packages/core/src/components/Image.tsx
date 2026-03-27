@@ -1,3 +1,5 @@
+import { cn } from '@/utils/cn.js';
+
 interface ImageProps {
   src: string;
   alt?: string;
@@ -7,26 +9,29 @@ interface ImageProps {
   className?: string;
 }
 
+const fitClasses: Record<string, string> = {
+  contain: 'object-contain',
+  cover: 'object-cover',
+  fill: 'object-fill',
+  none: 'object-none',
+};
+
 export function Image({
   src,
   alt = '',
   fit = 'contain',
   width,
   height,
-  className = '',
+  className,
 }: ImageProps) {
   return (
     <img
       src={src}
       alt={alt}
-      className={className}
+      className={cn('block max-w-full max-h-full', fitClasses[fit], className)}
       style={{
-        objectFit: fit,
         width: width ?? '100%',
         height: height ?? 'auto',
-        maxWidth: '100%',
-        maxHeight: '100%',
-        display: 'block',
       }}
     />
   );

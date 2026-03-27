@@ -51,5 +51,47 @@ export { getTransition } from './transitions/index.js';
 // Presenter
 export { PresenterView } from './presenter/PresenterView.js';
 
+// UI Components (shadcn)
+export { Button, buttonVariants } from './components/ui/button.js';
+export {
+  Card,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardAction,
+  CardDescription,
+  CardContent,
+} from './components/ui/card.js';
+export { Badge, badgeVariants } from './components/ui/badge.js';
+export { Separator } from './components/ui/separator.js';
+export {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+  TooltipProvider,
+} from './components/ui/tooltip.js';
+export {
+  Dialog,
+  DialogPortal,
+  DialogOverlay,
+  DialogTrigger,
+  DialogClose,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+} from './components/ui/dialog.js';
+export { Tabs, TabsList, TabsTrigger, TabsContent } from './components/ui/tabs.js';
+export {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from './components/ui/accordion.js';
+export { Alert, AlertTitle, AlertDescription } from './components/ui/alert.js';
+export { Avatar, AvatarImage, AvatarFallback } from './components/ui/avatar.js';
+
 // Utils
 export { defineConfig } from './utils/defineConfig.js';
+export { cn } from './utils/cn.js';

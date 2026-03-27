@@ -28,35 +28,14 @@ export class SlideErrorBoundary extends Component<Props, State> {
   render() {
     if (this.state.hasError) {
       return (
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: 'var(--rs-color-background, #0a0a0a)',
-            color: 'var(--rs-color-text, #fafafa)',
-            fontFamily: 'var(--rs-font-body)',
-            padding: '2rem',
-          }}
-        >
-          <div style={{ fontSize: '2rem', marginBottom: '1rem', opacity: 0.5 }}>
+        <div className="w-full h-full flex flex-col items-center justify-center bg-rs-background text-rs-text font-body p-8">
+          <div className="text-3xl mb-4 opacity-50">
             Slide {this.props.slideIndex + 1}
           </div>
-          <div style={{ fontSize: '1.25rem', color: '#ef4444', marginBottom: '0.5rem' }}>
+          <div className="text-xl text-destructive mb-2">
             Error rendering slide
           </div>
-          <pre
-            style={{
-              fontSize: '0.875rem',
-              opacity: 0.6,
-              maxWidth: '600px',
-              overflow: 'auto',
-              whiteSpace: 'pre-wrap',
-            }}
-          >
+          <pre className="text-sm opacity-60 max-w-xl overflow-auto whitespace-pre-wrap">
             {this.state.error?.message}
           </pre>
         </div>

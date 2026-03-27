@@ -169,16 +169,7 @@ function DeckInner() {
   return (
     <div
       ref={containerRef}
-      className="rs-deck-root"
-      style={{
-        width: '100vw',
-        height: '100vh',
-        overflow: 'hidden',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'var(--rs-color-background)',
-      }}
+      className="rs-deck-root w-screen h-screen overflow-hidden flex items-center justify-center bg-rs-background"
     >
       <div
         style={{
@@ -204,17 +195,7 @@ function DeckInner() {
       </div>
 
       {/* Slide counter */}
-      <div
-        style={{
-          position: 'fixed',
-          bottom: '1rem',
-          right: '1rem',
-          fontSize: '0.875rem',
-          color: 'var(--rs-color-text-secondary)',
-          fontFamily: 'var(--rs-font-body)',
-          opacity: 0.6,
-        }}
-      >
+      <div className="fixed bottom-4 right-4 text-sm text-rs-text-secondary font-body opacity-60">
         {currentSlide + 1} / {totalSlides}
       </div>
 

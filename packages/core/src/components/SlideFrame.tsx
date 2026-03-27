@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import type { SlideMeta } from '../types/index.js';
+import { cn } from '@/utils/cn.js';
 
 interface SlideFrameProps {
   meta: SlideMeta;
@@ -11,18 +12,14 @@ interface SlideFrameProps {
 export function SlideFrame({ meta, width, height, children }: SlideFrameProps) {
   return (
     <div
-      className="rs-slide-frame"
+      className={cn(
+        'rs-slide-frame relative overflow-hidden bg-rs-background text-rs-text font-body bg-cover bg-center',
+      )}
       style={{
         width,
         height,
-        position: 'relative',
-        overflow: 'hidden',
-        backgroundColor: meta.backgroundColor ?? 'var(--rs-color-background)',
+        backgroundColor: meta.backgroundColor ?? undefined,
         backgroundImage: meta.backgroundImage ? `url(${meta.backgroundImage})` : undefined,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        color: 'var(--rs-color-text)',
-        fontFamily: 'var(--rs-font-body)',
       }}
     >
       {children}
