@@ -92,6 +92,17 @@ export {
 export { Alert, AlertTitle, AlertDescription } from './components/ui/alert.js';
 export { Avatar, AvatarImage, AvatarFallback } from './components/ui/avatar.js';
 
+// Charts
+export {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+  ChartLegend,
+  ChartLegendContent,
+  ChartStyle,
+} from './components/ui/chart.js';
+export type { ChartConfig } from './components/ui/chart.js';
+
 // Utils
 export { defineConfig } from './utils/defineConfig.js';
 export { cn } from './utils/cn.js';
