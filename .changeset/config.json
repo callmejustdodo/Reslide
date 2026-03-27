@@ -10,8 +10,6 @@
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
   "ignore": [
-    "example-basic",
-    "example-with-animations",
-    "example-conference-talk"
+    "example-basic"
   ]
 }
