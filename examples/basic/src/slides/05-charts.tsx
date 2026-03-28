@@ -1,18 +1,20 @@
+import { SlideLayout } from '@/components/slide-layout';
+import { Title } from '@/components/title';
 import {
-  SlideLayout,
-  Title,
   Card,
   CardContent,
   CardHeader,
   CardTitle,
   CardDescription,
+} from '@/components/ui/card';
+import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
   ChartLegend,
   ChartLegendContent,
-} from '@reslide/core';
-import type { ChartConfig } from '@reslide/core';
+} from '@/components/ui/chart';
+import type { ChartConfig } from '@/components/ui/chart';
 import {
   Bar,
   BarChart,

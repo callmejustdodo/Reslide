@@ -1,4 +1,7 @@
-import { SlideLayout, Title, Body, Code } from '@reslide/core';
+import { SlideLayout } from '@/components/slide-layout';
+import { Title } from '@/components/title';
+import { Body } from '@/components/body';
+import { Code } from '@/components/code';
 
 export default function Theming() {
   return (

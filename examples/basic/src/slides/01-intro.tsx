@@ -1,4 +1,7 @@
-import { SlideLayout, Title, Subtitle, Notes } from '@reslide/core';
+import { Notes } from '@reslide/core';
+import { SlideLayout } from '@/components/slide-layout';
+import { Title } from '@/components/title';
+import { Subtitle } from '@/components/subtitle';
 
 export default function Intro() {
   return (
