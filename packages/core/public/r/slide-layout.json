@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "slide-layout",
+  "type": "registry:component",
+  "title": "Slide Layout",
+  "description": "Layout presets (Center, Default, TwoColumn, Section, Blank) for Reslide slides.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/slide-layout/slide-layout.tsx",
+      "content": "import type { ReactNode } from \"react\"\nimport { cn } from \"@/registry/new-york/utils/cn\"\n\ninterface LayoutProps {\n  children: ReactNode\n  className?: string\n}\n\nfunction Center({ children, className }: LayoutProps) {\n  return (\n    <div\n      className={cn(\n        \"flex flex-col items-center justify-center w-full h-full p-16 gap-6 text-center\",\n        className,\n      )}\n    >\n      {children}\n    </div>\n  )\n}\n\nfunction Default({ children, className }: LayoutProps) {\n  return (\n    <div className={cn(\"flex flex-col w-full h-full p-16 gap-6\", className)}>\n      {children}\n    </div>\n  )\n}\n\ninterface TwoColumnProps extends LayoutProps {\n  sizes?: [number, number]\n  gap?: string\n}\n\nfunction TwoColumn({\n  children,\n  className,\n  sizes = [1, 1],\n  gap = \"2rem\",\n}: TwoColumnProps) {\n  return (\n    <div\n      className={cn(\"grid w-full h-full p-16\", className)}\n      style={{\n        gridTemplateColumns: `${sizes[0]}fr ${sizes[1]}fr`,\n        gap,\n      }}\n    >\n      {children}\n    </div>\n  )\n}\n\nfunction Section({ children, className }: LayoutProps) {\n  return (\n    <div\n      className={cn(\n        \"flex flex-col items-center justify-center w-full h-full p-16 text-center\",\n        className,\n      )}\n    >\n      {children}\n    </div>\n  )\n}\n\nfunction Blank({ children, className }: LayoutProps) {\n  return (\n    <div className={cn(\"w-full h-full relative\", className)}>{children}</div>\n  )\n}\n\nexport const SlideLayout = {\n  Center,\n  Default,\n  TwoColumn,\n  Section,\n  Blank,\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

@@ -25,7 +25,8 @@
     "dev": "tsup --watch",
     "test": "vitest run",
     "test:watch": "vitest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "registry:build": "shadcn build"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
@@ -51,6 +52,7 @@
     "tailwindcss": "4",
     "tsup": "^8.3.0",
     "typescript": "^5.7.0",
+    "shadcn": "^2.5.0",
     "vitest": "^2.1.0"
   }
 }

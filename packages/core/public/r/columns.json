@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "columns",
+  "type": "registry:component",
+  "title": "Columns",
+  "description": "Multi-column grid layout component for Reslide presentations.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/columns/columns.tsx",
+      "content": "import type { ReactNode } from \"react\"\nimport { cn } from \"@/registry/new-york/utils/cn\"\n\ninterface ColumnsProps {\n  children: ReactNode\n  sizes?: number[]\n  gap?: string\n  className?: string\n}\n\nexport function Columns({\n  children,\n  sizes = [1, 1],\n  gap = \"2rem\",\n  className,\n}: ColumnsProps) {\n  return (\n    <div\n      className={cn(\"grid w-full h-full\", className)}\n      style={{\n        gridTemplateColumns: sizes.map((s) => `${s}fr`).join(\" \"),\n        gap,\n      }}\n    >\n      {children}\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

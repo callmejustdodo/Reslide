@@ -1,0 +1,319 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "reslide",
+  "homepage": "https://reslide.dev",
+  "items": [
+    {
+      "name": "utils",
+      "type": "registry:lib",
+      "title": "Utilities",
+      "description": "Utility functions for class name merging (cn).",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "registry/new-york/utils/cn.tsx",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "title",
+      "type": "registry:component",
+      "title": "Title",
+      "description": "Slide title component with heading typography for Reslide presentations.",
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "registry/new-york/title/title.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "subtitle",
+      "type": "registry:component",
+      "title": "Subtitle",
+      "description": "Slide subtitle component with secondary heading typography for Reslide presentations.",
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "registry/new-york/subtitle/subtitle.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "body",
+      "type": "registry:component",
+      "title": "Body",
+      "description": "Body text component for slide content in Reslide presentations.",
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "registry/new-york/body/body.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "code",
+      "type": "registry:component",
+      "title": "Code",
+      "description": "Syntax-highlighted code block component using Shiki for Reslide presentations.",
+      "registryDependencies": ["utils"],
+      "dependencies": ["shiki"],
+      "files": [
+        {
+          "path": "registry/new-york/code/code.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "image",
+      "type": "registry:component",
+      "title": "Image",
+      "description": "Image component with fit modes for Reslide presentations.",
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "registry/new-york/image/image.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "list",
+      "type": "registry:component",
+      "title": "List",
+      "description": "Ordered and unordered list component for Reslide presentations.",
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "registry/new-york/list/list.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "columns",
+      "type": "registry:component",
+      "title": "Columns",
+      "description": "Multi-column grid layout component for Reslide presentations.",
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "registry/new-york/columns/columns.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "slide-layout",
+      "type": "registry:component",
+      "title": "Slide Layout",
+      "description": "Layout presets (Center, Default, TwoColumn, Section, Blank) for Reslide slides.",
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "registry/new-york/slide-layout/slide-layout.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "A button component with multiple variants and sizes.",
+      "registryDependencies": ["utils"],
+      "dependencies": ["class-variance-authority", "radix-ui"],
+      "files": [
+        {
+          "path": "registry/new-york/button/button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "A badge component with multiple variants.",
+      "registryDependencies": ["utils"],
+      "dependencies": ["class-variance-authority", "radix-ui"],
+      "files": [
+        {
+          "path": "registry/new-york/badge/badge.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "A card component with header, content, footer, and action sub-components.",
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "registry/new-york/card/card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "title": "Separator",
+      "description": "A visual separator component for horizontal or vertical dividers.",
+      "registryDependencies": ["utils"],
+      "dependencies": ["radix-ui"],
+      "files": [
+        {
+          "path": "registry/new-york/separator/separator.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "A tooltip component built on Radix UI primitives.",
+      "registryDependencies": ["utils"],
+      "dependencies": ["radix-ui"],
+      "files": [
+        {
+          "path": "registry/new-york/tooltip/tooltip.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "Dialog",
+      "description": "A dialog/modal component with overlay, header, footer, and close button.",
+      "registryDependencies": ["utils", "button"],
+      "dependencies": ["radix-ui", "lucide-react"],
+      "files": [
+        {
+          "path": "registry/new-york/dialog/dialog.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "A tabs component with default and line variants, horizontal and vertical orientations.",
+      "registryDependencies": ["utils"],
+      "dependencies": ["class-variance-authority", "radix-ui"],
+      "files": [
+        {
+          "path": "registry/new-york/tabs/tabs.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "accordion",
+      "type": "registry:ui",
+      "title": "Accordion",
+      "description": "A collapsible accordion component built on Radix UI.",
+      "registryDependencies": ["utils"],
+      "dependencies": ["radix-ui", "lucide-react"],
+      "files": [
+        {
+          "path": "registry/new-york/accordion/accordion.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "alert",
+      "type": "registry:ui",
+      "title": "Alert",
+      "description": "An alert component with default and destructive variants.",
+      "registryDependencies": ["utils"],
+      "dependencies": ["class-variance-authority"],
+      "files": [
+        {
+          "path": "registry/new-york/alert/alert.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "Avatar",
+      "description": "An avatar component with image, fallback, badge, and group support.",
+      "registryDependencies": ["utils"],
+      "dependencies": ["radix-ui"],
+      "files": [
+        {
+          "path": "registry/new-york/avatar/avatar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "scroll-area",
+      "type": "registry:ui",
+      "title": "Scroll Area",
+      "description": "A scrollable area component with custom scrollbars.",
+      "registryDependencies": ["utils"],
+      "dependencies": ["radix-ui"],
+      "files": [
+        {
+          "path": "registry/new-york/scroll-area/scroll-area.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "title": "Table",
+      "description": "A table component with header, body, footer, and responsive container.",
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "registry/new-york/table/table.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "Progress",
+      "description": "A progress bar component built on Radix UI.",
+      "registryDependencies": ["utils"],
+      "dependencies": ["radix-ui"],
+      "files": [
+        {
+          "path": "registry/new-york/progress/progress.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "chart",
+      "type": "registry:ui",
+      "title": "Chart",
+      "description": "Chart components (container, tooltip, legend) built on Recharts.",
+      "registryDependencies": ["utils"],
+      "dependencies": ["recharts@3.8.0"],
+      "files": [
+        {
+          "path": "registry/new-york/chart/chart.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    }
+  ]
+}

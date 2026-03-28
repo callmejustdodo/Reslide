@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "code",
+  "type": "registry:component",
+  "title": "Code",
+  "description": "Syntax-highlighted code block component using Shiki for Reslide presentations.",
+  "dependencies": [
+    "shiki"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/code/code.tsx",
+      "content": "\"use client\"\n\nimport { useEffect, useState, useRef } from \"react\"\nimport { cn } from \"@/registry/new-york/utils/cn\"\n\ninterface CodeProps {\n  children: string\n  language?: string\n  highlightLines?: number[]\n  showLineNumbers?: boolean\n  className?: string\n}\n\nexport function Code({\n  children,\n  language = \"typescript\",\n  highlightLines = [],\n  showLineNumbers = false,\n  className,\n}: CodeProps) {\n  const [html, setHtml] = useState<string>(\"\")\n  const codeRef = useRef<HTMLDivElement>(null)\n\n  useEffect(() => {\n    let cancelled = false\n\n    async function highlight() {\n      try {\n        const shiki = await import(\"shiki\")\n        const highlighter = await shiki.createHighlighter({\n          themes: [\"github-dark\"],\n          langs: [language],\n        })\n\n        const result = highlighter.codeToHtml(children.trim(), {\n          lang: language,\n          theme: \"github-dark\",\n        })\n\n        if (!cancelled) setHtml(result)\n        highlighter.dispose()\n      } catch {\n        if (!cancelled) {\n          setHtml(`<pre><code>${escapeHtml(children.trim())}</code></pre>`)\n        }\n      }\n    }\n\n    highlight()\n    return () => {\n      cancelled = true\n    }\n  }, [children, language])\n\n  return (\n    <div\n      ref={codeRef}\n      className={cn(\n        \"rounded-xl overflow-hidden text-xl font-code leading-relaxed text-left\",\n        className,\n      )}\n      dangerouslySetInnerHTML={{ __html: html }}\n    />\n  )\n}\n\nfunction escapeHtml(text: string): string {\n  return text\n    .replace(/&/g, \"&amp;\")\n    .replace(/</g, \"&lt;\")\n    .replace(/>/g, \"&gt;\")\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

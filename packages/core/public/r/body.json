@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "body",
+  "type": "registry:component",
+  "title": "Body",
+  "description": "Body text component for slide content in Reslide presentations.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/body/body.tsx",
+      "content": "import type { ReactNode } from \"react\"\nimport { cn } from \"@/registry/new-york/utils/cn\"\n\ninterface BodyProps {\n  children: ReactNode\n  className?: string\n}\n\nexport function Body({ children, className }: BodyProps) {\n  return (\n    <p\n      className={cn(\n        \"text-[1.75rem] font-body text-rs-text-secondary leading-relaxed m-0\",\n        className,\n      )}\n    >\n      {children}\n    </p>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "image",
+  "type": "registry:component",
+  "title": "Image",
+  "description": "Image component with fit modes for Reslide presentations.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/image/image.tsx",
+      "content": "import { cn } from \"@/registry/new-york/utils/cn\"\n\ninterface ImageProps {\n  src: string\n  alt?: string\n  fit?: \"contain\" | \"cover\" | \"fill\" | \"none\"\n  width?: string | number\n  height?: string | number\n  className?: string\n}\n\nconst fitClasses: Record<string, string> = {\n  contain: \"object-contain\",\n  cover: \"object-cover\",\n  fill: \"object-fill\",\n  none: \"object-none\",\n}\n\nexport function Image({\n  src,\n  alt = \"\",\n  fit = \"contain\",\n  width,\n  height,\n  className,\n}: ImageProps) {\n  return (\n    <img\n      src={src}\n      alt={alt}\n      className={cn(\"block max-w-full max-h-full\", fitClasses[fit], className)}\n      style={{\n        width: width ?? \"100%\",\n        height: height ?? \"auto\",\n      }}\n    />\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

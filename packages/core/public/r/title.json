@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "title",
+  "type": "registry:component",
+  "title": "Title",
+  "description": "Slide title component with heading typography for Reslide presentations.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/title/title.tsx",
+      "content": "import type { ReactNode } from \"react\"\nimport { cn } from \"@/registry/new-york/utils/cn\"\n\ninterface TitleProps {\n  children: ReactNode\n  className?: string\n}\n\nexport function Title({ children, className }: TitleProps) {\n  return (\n    <h1\n      className={cn(\n        \"text-[3.5rem] font-bold font-heading text-rs-text leading-tight m-0\",\n        className,\n      )}\n    >\n      {children}\n    </h1>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

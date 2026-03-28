@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "list",
+  "type": "registry:component",
+  "title": "List",
+  "description": "Ordered and unordered list component for Reslide presentations.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/list/list.tsx",
+      "content": "import type { ReactNode } from \"react\"\nimport { cn } from \"@/registry/new-york/utils/cn\"\n\ninterface ListProps {\n  items: ReactNode[]\n  ordered?: boolean\n  className?: string\n}\n\nexport function List({ items, ordered = false, className }: ListProps) {\n  const Tag = ordered ? \"ol\" : \"ul\"\n\n  return (\n    <Tag\n      className={cn(\n        \"text-[1.75rem] font-body text-rs-text leading-loose pl-8 m-0\",\n        ordered ? \"list-decimal\" : \"list-disc\",\n        className,\n      )}\n    >\n      {items.map((item, i) => (\n        <li key={i} className=\"mb-2\">\n          {item}\n        </li>\n      ))}\n    </Tag>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}
